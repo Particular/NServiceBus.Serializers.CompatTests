@@ -148,7 +148,7 @@
             "NServiceBus:(5.0,6.0)",
 
             // v6
-            "NServiceBus:(6.0-beta,6.1-beta)" //due to an issue in Paket, it has to be specified like this
+            "NServiceBus:(6.0,7.0)" //due to an issue in Paket, it has to be specified like this
         };
     }
 }
