@@ -7,11 +7,5 @@
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateTime { get; set; }
-        public DateTime DateTimeLocal { get; set; }
-        public DateTime DateTimeUtc { get; set; }
-        public DateTimeOffset DateTimeOffset { get; set; }
-        public DateTimeOffset DateTimeOffsetLocal { get; set; }
-        public DateTimeOffset DateTimeOffsetUtc { get; set; }
     }
 }

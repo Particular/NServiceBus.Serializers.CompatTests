@@ -88,7 +88,7 @@
                     SerializationFormat.Xml,
                     SerializationFormat.Json
                 }
-                where t.SupportsVersion(rp.Version) && t.SupportsVersion(cp.Version) && t.SupportsFormat(sf)
+                where t.IsSupported(sf, rp.Version) && t.IsSupported(sf, cp.Version)
                 select new TestInfo
                 {
                     RunPackage = rp,
@@ -111,7 +111,7 @@
                     SerializationFormat.Xml,
                     SerializationFormat.Json
                 }
-                where t.SupportsVersion(p.Version) && t.SupportsFormat(sf)
+                where t.IsSupported(sf, p.Version)
                 select new TestInfo
                 {
                     RunPackage = p,

@@ -9,7 +9,7 @@
     {
         public override Type MessageType => typeof(PolymorphicCollection);
 
-        public override bool SupportsFormat(SerializationFormat format)
+        public override bool IsSupported(SerializationFormat format, string version)
         {
             return format == SerializationFormat.Json;
         }
