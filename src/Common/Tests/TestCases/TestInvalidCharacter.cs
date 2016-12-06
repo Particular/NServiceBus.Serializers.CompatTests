@@ -9,11 +9,11 @@
     {
         public override Type MessageType => typeof(MessageWithInvalidCharacter);
 
-        public override bool SupportsVersion(string version)
+        public override bool IsSupported(SerializationFormat format, string version)
         {
             return !version.StartsWith("3.3");
         }
-
+        
         public override void Populate(object instance)
         {
             var expected = (MessageWithInvalidCharacter)instance;

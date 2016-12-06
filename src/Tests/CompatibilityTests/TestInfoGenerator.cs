@@ -88,7 +88,7 @@
                     SerializationFormat.Xml,
                     SerializationFormat.Json
                 }
-                where t.SupportsVersion(rp.Version) && t.SupportsVersion(cp.Version) && t.SupportsFormat(sf)
+                where t.IsSupported(sf, rp.Version) && t.IsSupported(sf, cp.Version)
                 select new TestInfo
                 {
                     RunPackage = rp,
@@ -111,7 +111,7 @@
                     SerializationFormat.Xml,
                     SerializationFormat.Json
                 }
-                where t.SupportsVersion(p.Version) && t.SupportsFormat(sf)
+                where t.IsSupported(sf, p.Version)
                 select new TestInfo
                 {
                     RunPackage = p,
@@ -148,7 +148,7 @@
             "NServiceBus:(5.0,6.0)",
 
             // v6
-            "NServiceBus:(6.0-beta,6.1-beta)" //due to an issue in Paket, it has to be specified like this
+            "NServiceBus:(6.0,7.0)" //due to an issue in Paket, it has to be specified like this
         };
     }
 }

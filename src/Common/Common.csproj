@@ -84,9 +84,11 @@
     <Compile Include="Tests\TestCases\TestGenericMessage.cs" />
     <Compile Include="Tests\TestCases\TestInvalidCharacter.cs" />
     <Compile Include="Tests\TestCases\TestLists.cs" />
+    <Compile Include="Tests\TestCases\TestDates.cs" />
     <Compile Include="Tests\TestCases\TestPoco.cs" />
     <Compile Include="Tests\TestCases\TestPolymorphicCollections.cs" />
     <Compile Include="Tests\TestCases\TestXmlSpecialCharacters.cs" />
+    <Compile Include="Tests\TestCases\Types\Dates.cs" />
     <Compile Include="Tests\TestCases\Types\GenericMessage.cs" />
     <Compile Include="Tests\TestCases\Types\ISampleEvent.cs" />
     <Compile Include="Tests\TestCases\Types\MessageWithInvalidCharacter.cs" />
