@@ -3,6 +3,7 @@
     public enum SerializationFormat
     {
         Xml,
-        Json
+        Json,
+        ExternalJson
     }
 }
