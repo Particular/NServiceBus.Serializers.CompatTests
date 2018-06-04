@@ -19,8 +19,8 @@
 
         public async Task<Package> DownloadPackageWithDependencies(PackageInfo packageInfo)
         {
-            var latesVersion = await GetLatestPackageVersion(packageInfo);
-            var version = SemVer.Parse(latesVersion);
+            var latestVersion = await GetLatestPackageVersion(packageInfo);
+            var version = SemVer.Parse(latestVersion);
 
             var packageLocation = await DownloadPackage(packageInfo, version);
             var dependencies = await GetAllDependencies(packageInfo, version);
@@ -30,7 +30,7 @@
             var package = new Package
             {
                 Info = packageInfo,
-                Version = latesVersion,
+                Version = latestVersion,
                 Files = files.Where(f => Path.GetExtension(f.Name) == ".dll").ToArray()
             };
 
