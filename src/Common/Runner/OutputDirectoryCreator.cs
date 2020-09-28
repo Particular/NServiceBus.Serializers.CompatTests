@@ -14,13 +14,6 @@
                 Directory.CreateDirectory(outputDirectory);
             }
 
-            //if (Directory.Exists(outputDirectory))
-            //{
-            //    Directory.Delete(outputDirectory, true);
-            //}
-
-            //Directory.CreateDirectory(outputDirectory);
-
             return outputDirectory;
         }
     }

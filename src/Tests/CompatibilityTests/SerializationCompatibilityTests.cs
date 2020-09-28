@@ -29,7 +29,8 @@
             return Path.Combine(outputDirectory, inputFileName.ToString());
         }
 
-        [Test, TestCaseSource(typeof(TestInfoGenerator), "Generate", Category = "SerializerCompatibility")]
+        [Test]
+        [TestCaseSource(typeof(TestInfoGenerator), "Generate", Category = "SerializerCompatibility")]
         public void Test(TestInfo testInfo)
         {
             if (testInfo.Type == TestInfo.TestType.Serialization)

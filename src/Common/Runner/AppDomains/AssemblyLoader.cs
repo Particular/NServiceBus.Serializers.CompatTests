@@ -8,7 +8,6 @@
 
     public class AssemblyLoader : MarshalByRefObject
     {
-        // ReSharper disable once EmptyConstructor
         public AssemblyLoader()
         {
 #if NCRUNCH
