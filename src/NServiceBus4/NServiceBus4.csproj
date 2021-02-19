@@ -7,7 +7,6 @@
 
 	<ItemGroup>		
 		<PackageReference Include="NServiceBus" Version="4.0.10" />
-		<PackageReference Include="NServiceBus.Interfaces" Version="4.0.10" />		
 	</ItemGroup>
 
 	<ItemGroup>
