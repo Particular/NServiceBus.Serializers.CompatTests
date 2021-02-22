@@ -4,8 +4,8 @@
     using System.IO;
     using System.Reflection;
     using Nuget;
+    using NuGet.Versioning;
     using NUnit.Framework;
-    using Paket;
 
     [Serializable]
     public class AppDomainCreator
@@ -14,7 +14,7 @@
         {
             var startupDir = CreateStartupDir(startupDirTemplate, package.Version, Guid.NewGuid());
 
-            var sourceAssemblyDir = Path.Combine(TestContext.CurrentContext.TestDirectory, package.Info.PackageName + SemVer.Parse(package.Version).Major);
+            var sourceAssemblyDir = Path.Combine(TestContext.CurrentContext.TestDirectory, package.Info.PackageName + SemanticVersion.Parse(package.Version).Major);
             var sourceAssemblyFiles = Directory.GetFiles(sourceAssemblyDir, "*");
 
             CopyAssembliesToStarupDir(startupDir, sourceAssemblyFiles, package.Files);

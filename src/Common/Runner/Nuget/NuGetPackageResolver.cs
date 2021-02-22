@@ -1,17 +1,20 @@
 ﻿namespace Common.Runner.Nuget
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.FSharp.Control;
-    using Microsoft.FSharp.Core;
-    using Paket;
+    using NuGet.Common;
+    using NuGet.Packaging;
+    using NuGet.Protocol;
+    using NuGet.Protocol.Core.Types;
+    using NuGet.Versioning;
 
     public class NuGetPackageResolver
     {
-        public NuGetPackageResolver(string packagesStore, string nugetFeed = Constants.DefaultNugetStream)
+        public NuGetPackageResolver(string packagesStore, string nugetFeed = "https://api.nuget.org/v3/index.json")
         {
             this.packagesStore = packagesStore;
             this.nugetFeed = nugetFeed;
@@ -20,38 +23,45 @@
         public async Task<Package> DownloadPackageWithDependencies(PackageInfo packageInfo)
         {
             var latesVersion = await GetLatestPackageVersion(packageInfo);
-            var version = SemVer.Parse(latesVersion);
 
-            var packageLocation = await DownloadPackage(packageInfo, version);
-            var dependencies = await GetAllDependencies(packageInfo, version);
-
-            var files = NuGetV2.GetLibFiles(packageLocation).Concat(dependencies);
+            var packageLocation = await DownloadPackage(packageInfo, latesVersion);
+            var dependencies = await GetAllDependencies(packageInfo, latesVersion);
 
             var package = new Package
             {
                 Info = packageInfo,
-                Version = latesVersion,
-                Files = files.Where(f => Path.GetExtension(f.Name) == ".dll").ToArray()
+                Version = latesVersion.ToString(),
+                Files = dependencies.Where(f => Path.GetExtension(f.Name) == ".dll").ToArray()
             };
 
             return package;
         }
 
-        async Task<string> GetLatestPackageVersion(PackageInfo packageInfo)
+        async Task<NuGetVersion> GetLatestPackageVersion(PackageInfo packageInfo)
         {
-            var requirement = VersionRequirement.Parse(packageInfo.VersionConstraint);
-            var versions = await GetAllVersions(packageInfo.PackageName);
-            var matchingVersions = versions.Where(v => requirement.IsInRange(v, FSharpOption<bool>.None)).ToList();
-            return matchingVersions.Max().AsString;
+            var logger = NullLogger.Instance;
+            var cancellationToken = CancellationToken.None;
+
+            var cache = new SourceCacheContext();
+            var repository = Repository.Factory.GetCoreV3(nugetFeed);
+            var resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            var versions = await resource.GetAllVersionsAsync(
+                packageInfo.PackageName,
+                cache,
+                logger,
+                cancellationToken);
+
+            return packageInfo.VersionConstraint.FindBestMatch(versions);
         }
 
-        async Task<IEnumerable<FileInfo>> GetAllDependencies(PackageInfo package, SemVerInfo version)
+        async Task<IEnumerable<FileInfo>> GetAllDependencies(PackageInfo package, NuGetVersion version)
         {
             var packageDetails = await GetPackageDetails(package.PackageName, version);
 
             var fileInfos = new List<FileInfo>();
 
-            var dependencies = packageDetails.Dependencies.Select(d => new PackageInfo(d.Item1.ToString(), d.Item2.FormatInNuGetSyntax()));
+            var dependencies = packageDetails.GetDependencyGroups().SelectMany(x => x.Packages.Select(y => new PackageInfo(y.Id, y.VersionRange)));
 
             foreach (var dependency in dependencies)
             {
@@ -63,39 +73,82 @@
             return fileInfos;
         }
 
-        async Task<string> DownloadPackage(PackageInfo package, SemVerInfo version)
+        async Task<string> DownloadPackage(PackageInfo package, NuGetVersion version)
         {
-            var result = await FSharpAsync.StartAsTask(
-                NuGetV2.DownloadPackage(packagesStore,
-                    FSharpOption<Utils.Auth>.None,
-                    nugetFeed,
-                    Domain.GroupName("default"),
-                    Domain.PackageName(package.PackageName),
+            var logger = NullLogger.Instance;
+            var cancellationToken = CancellationToken.None;
+
+            var cache = new SourceCacheContext();
+            var repository = Repository.Factory.GetCoreV3(nugetFeed);
+            var resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            using (var packageStream = new MemoryStream())
+            {
+
+                await resource.CopyNupkgToStreamAsync(
+                    package.PackageName,
                     version,
-                    includeVersionInPath: true,
-                    force: false),
-                FSharpOption<TaskCreationOptions>.None,
-                FSharpOption<CancellationToken>.None);
-            return result;
+                    packageStream,
+                    cache,
+                    logger,
+                    cancellationToken);
+
+                Console.WriteLine($"Downloaded package {package.PackageName} {version}");
+
+                using (var packageReader = new PackageArchiveReader(packageStream))
+                {
+
+                    return packageReader.GetFiles().First();
+                }
+            }
         }
 
-        async Task<NuGetV2.NugetPackageCache> GetPackageDetails(string packageName, SemVerInfo version)
+        async Task<NuspecReader> GetPackageDetails(string packageName, NuGetVersion version)
         {
-            var result = await FSharpAsync.StartAsTask(
-                NuGetV2.getDetailsFromNuGet(true, FSharpOption<Utils.Auth>.None, nugetFeed, Domain.PackageName(packageName), version),
-                FSharpOption<TaskCreationOptions>.None,
-                FSharpOption<CancellationToken>.None);
+            var logger = NullLogger.Instance;
+            var cancellationToken = CancellationToken.None;
 
-            return result;
+            var cache = new SourceCacheContext();
+            var repository = Repository.Factory.GetCoreV3(nugetFeed);
+            var resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            using (var packageStream = new MemoryStream())
+            {
+
+                await resource.CopyNupkgToStreamAsync(
+                    packageName,
+                    version,
+                    packageStream,
+                    cache,
+                    logger,
+                    cancellationToken);
+
+                Console.WriteLine($"Downloaded package {packageName} {version}");
+
+                using (var packageReader = new PackageArchiveReader(packageStream))
+                {
+                    var nuspecReader = await packageReader.GetNuspecReaderAsync(cancellationToken);
+                    return nuspecReader;
+                }
+            }
         }
 
-        async Task<IEnumerable<SemVerInfo>> GetAllVersions(string packageName)
+        async Task<IEnumerable<NuGetVersion>> GetAllVersions(string packageName)
         {
-            var result = await FSharpAsync.StartAsTask(
-                NuGetV2.getAllVersions(FSharpOption<Utils.Auth>.None, nugetFeed, packageName),
-                FSharpOption<TaskCreationOptions>.None,
-                FSharpOption<CancellationToken>.None);
-            return result.Value.Select(SemVer.Parse);
+            var logger = NullLogger.Instance;
+            var cancellationToken = CancellationToken.None;
+
+            var cache = new SourceCacheContext();
+            var repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");
+            var resource = await repository.GetResourceAsync<FindPackageByIdResource>();
+
+            var versions = await resource.GetAllVersionsAsync(
+                packageName,
+                cache,
+                logger,
+                cancellationToken);
+            //todo: include the requirements
+            return versions;
         }
 
         readonly string packagesStore;
