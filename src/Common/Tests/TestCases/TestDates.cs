@@ -1,8 +1,8 @@
 ﻿namespace Common.Tests.TestCases
 {
     using System;
+    using NuGet.Versioning;
     using NUnit.Framework;
-    using Paket;
     using Types;
 
     public class TestDates : TestCase
@@ -14,7 +14,7 @@
                 return true;
             }
 
-            var current = SemVer.Parse(version);
+            var current = SemanticVersion.Parse(version);
 
             if (current.Major < 5)
             {
