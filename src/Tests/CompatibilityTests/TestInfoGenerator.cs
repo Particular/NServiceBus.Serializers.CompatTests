@@ -7,6 +7,7 @@
     using Common.Runner.AppDomains;
     using Common.Runner.Nuget;
     using Common.Tests;
+    using NuGet.Versioning;
 
     public class TestInfoGenerator
     {
@@ -83,12 +84,15 @@
             var testInfos = from t in testCases
                 from rp in packages
                 from cp in packages
+                let cpVersion = SemanticVersion.Parse(cp.Version)
+                let rpVersion = SemanticVersion.Parse(rp.Version)
                 from sf in new[]
                 {
                     SerializationFormat.Xml,
                     SerializationFormat.Json
                 }
-                where t.IsSupported(sf, rp.Version) && t.IsSupported(sf, cp.Version)
+                where t.IsSupported(sf, (rpVersion.Major, rpVersion.Minor, rpVersion.Patch)) 
+                      && t.IsSupported(sf, (cpVersion.Major, cpVersion.Minor, cpVersion.Patch))
                 select new TestInfo
                 {
                     RunPackage = rp,
@@ -106,12 +110,13 @@
         {
             var testInfos = from t in testCases
                 from p in packages
+                let version = SemanticVersion.Parse(p.Version)
                 from sf in new[]
                 {
                     SerializationFormat.Xml,
                     SerializationFormat.Json
                 }
-                where t.IsSupported(sf, p.Version)
+                where t.IsSupported(sf, (version.Major, version.Minor, version.Patch))
                 select new TestInfo
                 {
                     RunPackage = p,
