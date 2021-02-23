@@ -8,11 +8,11 @@
     {
         public override Type MessageType => typeof(TestMessageWithChar);
 
-        public override bool IsSupported(SerializationFormat format, string version)
+        public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version)
         {
-            return !version.StartsWith("3.3");
+            return !(version.Major != 3 && version.Minor == 3);
         }
-        
+
         public override void Populate(object instance)
         {
             var expected = (TestMessageWithChar)instance;

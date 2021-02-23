@@ -6,7 +6,7 @@
     {
         public abstract Type MessageType { get; }
 
-        public virtual bool IsSupported(SerializationFormat format, string version) => true;
+        public virtual bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version) => true;
 
         public abstract void Populate(object instance);
 

@@ -1,42 +1,39 @@
 ﻿namespace Common.Tests.TestCases
 {
     using System;
-    using NuGet.Versioning;
     using NUnit.Framework;
     using Types;
 
     public class TestDates : TestCase
     {
-        public override bool IsSupported(SerializationFormat format, string version)
+        public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version)
         {
             if (format != SerializationFormat.Json)
             {
                 return true;
             }
 
-            var current = SemanticVersion.Parse(version);
-
-            if (current.Major < 5)
+            if (version.Major < 5)
             {
                 return false;
             }
-            if (current.Major == 5)
+            if (version.Major == 5)
             {
-                if (current.Minor < 2)
+                if (version.Minor < 2)
                 {
                     return false;
                 }
 
-                if (current.Major > 2)
+                if (version.Major > 2)
                 {
                     return true;
                 }
 
-                return current.Patch > 20;
+                return version.Patch > 20;
             }
-            if (current.Major == 6)
+            if (version.Major == 6)
             {
-                return current.Minor > 0 || current.Patch > 3;
+                return version.Minor > 0 || version.Patch > 3;
             }
             return true;
         }

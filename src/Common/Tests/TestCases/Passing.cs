@@ -9,10 +9,7 @@
 
         //HINT: we need to put it and Passing here as Test.dll is not loaded into each custom nsb appdomains
         //      only Common.dll is. It should never run with other serialization test cases.
-        public override bool IsSupported(SerializationFormat format, string version)
-        {
-            return false;
-        }
+        public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version) => false;
 
         public override void Populate(object instance)
         {
