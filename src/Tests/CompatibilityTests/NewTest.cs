@@ -2,7 +2,12 @@
 {
     using static SimpleExec.Command;
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Threading.Tasks;
     using NUnit.Framework;
 
     [TestFixture]
@@ -66,7 +71,7 @@
                 //TODO Running just the executable from the correct working directory doesn't seem to work
                 //Run(version + ".exe", args: "Serialize", workingDirectory: workingDir);
                 //TODO redirecting standard output would be nice
-                Run(execPath, args: "Deserialize");
+                Console.Write(Read(execPath, args: "Deserialize"));
             }
             catch (Exception e)
             {
@@ -74,5 +79,7 @@
                 throw new Exception("Failed to run deserialization for version " + version, e);
             }
         }
+
+
     }
 }
