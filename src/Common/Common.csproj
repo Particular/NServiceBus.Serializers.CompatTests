@@ -9,7 +9,7 @@
 		<PackageReference Include="NUnit" Version="3.13.1" />
 		<PackageReference Include="FSharp.Core" Version="4.0.0.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="7.0.1" />
-		<PackageReference Include="Paket.Core" Version="2.5.0" />		
+		<PackageReference Include="Paket.Core" Version="5.257.0" />		
 	</ItemGroup>	
 
 </Project>
