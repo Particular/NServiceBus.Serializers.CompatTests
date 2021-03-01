@@ -10,6 +10,16 @@
     {
         public override Type MessageType => typeof(GenericMessage<int, string>);
 
+        public override bool IsSupported(SerializationFormat format, ValueTuple<int, int, int> version)
+        {
+            if (format == SerializationFormat.Xml)
+            {
+                return false;
+            }
+
+            return base.IsSupported(format, version);
+        }
+
         public override void Populate(object instance)
         {
             var expected = (GenericMessage<int, string>)instance;
