@@ -34,43 +34,23 @@ class Program
             foreach (var jsonSupportedTestCase in jsonSupportedTestCases)
             {
                 Console.WriteLine($"JSON - {jsonSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = Path.Combine(testDirectory.FullName, SerializationFormat.Json.ToString("G"), jsonSupportedTestCase.GetType().Name);
-
-                if (!Directory.Exists(testCaseFolder))
-                {
-                    Directory.CreateDirectory(testCaseFolder);
-                }
+                var testCaseFolder = GetTestCaseFolder(testDirectory, jsonSupportedTestCase, SerializationFormat.Json);
 
                 var fileName = GetFileName(testCaseFolder, "json");
-
                 var serializer = (ISerializerFacade) Activator.CreateInstance(jsonSerializerFacade, jsonSupportedTestCase.MessageType);
-                var testInstance = serializer.CreateInstance(jsonSupportedTestCase.MessageType);
-                using (var stream = new FileStream(fileName, FileMode.Create))
-                {
-                    serializer.Serialize(stream, testInstance);
-                    stream.Flush(true);
-                }
+
+                Serialize(serializer, jsonSupportedTestCase, fileName);
             }
 
             foreach (var xmlSupportedTestCase in xmlSupportedTestCases)
             {
                 Console.WriteLine($"XML - {xmlSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = Path.Combine(testDirectory.FullName, SerializationFormat.Xml.ToString("G"), xmlSupportedTestCase.GetType().Name);
-
-                if (!Directory.Exists(testCaseFolder))
-                {
-                    Directory.CreateDirectory(testCaseFolder);
-                }
+                var testCaseFolder = GetTestCaseFolder(testDirectory, xmlSupportedTestCase, SerializationFormat.Xml);
 
                 var fileName = GetFileName(testCaseFolder, "xml");
-
                 var serializer = (ISerializerFacade) Activator.CreateInstance(xmlSerializerFacade, xmlSupportedTestCase.MessageType);
-                var testInstance = serializer.CreateInstance(xmlSupportedTestCase.MessageType);
-                using (var stream = new FileStream(fileName, FileMode.Create))
-                {
-                    serializer.Serialize(stream, testInstance);
-                    stream.Flush(true);
-                }
+
+                Serialize(serializer, xmlSupportedTestCase, fileName);
             }
         }
 
@@ -129,6 +109,28 @@ class Program
                 }
             }
 
+        }
+    }
+
+    static string GetTestCaseFolder(DirectoryInfo testDirectory, TestCase testCase, SerializationFormat serializationFormat)
+    {
+        var testCaseFolder = Path.Combine(testDirectory.FullName, serializationFormat.ToString("G"), testCase.GetType().Name);
+
+        if (!Directory.Exists(testCaseFolder))
+        {
+            Directory.CreateDirectory(testCaseFolder);
+        }
+
+        return testCaseFolder;
+    }
+
+    static void Serialize(ISerializerFacade serializer, TestCase testCase, string fileName)
+    {
+        var testInstance = serializer.CreateInstance(testCase.MessageType);
+        using (var stream = new FileStream(fileName, FileMode.Create))
+        {
+            serializer.Serialize(stream, testInstance);
+            stream.Flush(true);
         }
     }
 
