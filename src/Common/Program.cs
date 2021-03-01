@@ -4,14 +4,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Versioning;
 using Common;
 using Common.Tests;
 
 class Program
 {
+    static TargetFrameworkAttribute targetFrameworkAttribute = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly()
+        .GetCustomAttributes(typeof(TargetFrameworkAttribute), false)
+        .SingleOrDefault();
+
     static void Main(string[] args)
     {
-        Console.WriteLine("Base dir:" + AppDomain.CurrentDomain.BaseDirectory);
         Console.WriteLine("Arguments: " + string.Join(Environment.NewLine, args));
 
         //TODO where should we store the files?
@@ -37,7 +41,7 @@ class Program
                     Directory.CreateDirectory(testCaseFolder);
                 }
 
-                var fileName = Path.Combine(testCaseFolder, Assembly.GetExecutingAssembly().GetName().Name + ".json");
+                var fileName = GetFileName(testCaseFolder, "json");
 
                 var serializer = (ISerializerFacade) Activator.CreateInstance(jsonSerializerFacade, jsonSupportedTestCase.MessageType);
                 var testInstance = serializer.CreateInstance(jsonSupportedTestCase.MessageType);
@@ -58,7 +62,7 @@ class Program
                     Directory.CreateDirectory(testCaseFolder);
                 }
 
-                var fileName = Path.Combine(testCaseFolder, Assembly.GetExecutingAssembly().GetName().Name + ".xml");
+                var fileName = GetFileName(testCaseFolder, "xml");
 
                 var serializer = (ISerializerFacade) Activator.CreateInstance(xmlSerializerFacade, xmlSupportedTestCase.MessageType);
                 var testInstance = serializer.CreateInstance(xmlSupportedTestCase.MessageType);
@@ -127,6 +131,8 @@ class Program
 
         }
     }
+
+    static string GetFileName(string testCaseFolder, string fileExtension) => Path.Combine(testCaseFolder, $"{Assembly.GetExecutingAssembly().GetName().Name} {targetFrameworkAttribute.FrameworkDisplayName}.{fileExtension}");
 
     static IEnumerable<TestCase> GetTestCasesMatchingCurrentVersion(SerializationFormat serializationFormat)
     {
