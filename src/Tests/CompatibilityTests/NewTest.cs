@@ -3,11 +3,9 @@
     using static SimpleExec.Command;
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Threading;
-    using System.Threading.Tasks;
+    using System.Linq;
+    using System.Text.RegularExpressions;
     using NUnit.Framework;
 
     [TestFixture]
@@ -19,58 +17,80 @@
         const string ConfigurationFolder = "Release";
 #endif
 
-        [TestCaseSource(nameof(NserviceBusVersions))]
-        [Test]
-        public void Serialize(string version)
+        [TestCaseSource(nameof(NServiceBusVersions)), Order(1)]
+        public void Serialize(TestDescription testDescription)
         {
-            var projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
-
-            //TODO: we need to discover the available target platforms for each project somehow
-            var workingDir = Path.Combine(projectDirectory, version, "bin", ConfigurationFolder, "net452");
-            var execPath = Path.Combine(workingDir, version + ".exe");
+            var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
             try
             {
-                //TODO Running just the executable from the correct working directory doesn't seem to work
-                //Run(version + ".exe", args: "Serialize", workingDirectory: workingDir);
                 //TODO redirecting standard output would be nice
                 Console.Write(Read(execPath, args: "Serialize"));
             }
             catch (Exception e)
             {
                 TestContext.WriteLine(e);
-                throw new Exception("Failed to run serialization for version " + version, e);
+                throw new Exception("Failed to run serialization for version " + testDescription.Name, e);
             }
         }
 
-        static string[] NserviceBusVersions = new[]
+        [TestCaseSource(nameof(NServiceBusVersions)), Order(2)]
+        public void Deserialize(TestDescription testDescription)
         {
-            "NServiceBus6.1",
-            "NServiceBus6.2"
-        };
-
-        [TestCaseSource(nameof(NserviceBusVersions))]
-        public void Deserialize(string version)
-        {
-            var projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
-            //TODO: Discover all test versions
-
-            //TODO: we need to discover the available target platforms for each project somehow
-            var workingDir = Path.Combine(projectDirectory, version, "bin", ConfigurationFolder, "net452");
-            var execPath = Path.Combine(workingDir, version + ".exe");
+            var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
             try
             {
-                //TODO Running just the executable from the correct working directory doesn't seem to work
-                //Run(version + ".exe", args: "Serialize", workingDirectory: workingDir);
                 //TODO redirecting standard output would be nice
                 Console.Write(Read(execPath, args: "Deserialize"));
             }
             catch (Exception e)
             {
                 TestContext.WriteLine(e);
-                throw new Exception("Failed to run deserialization for version " + version, e);
+                throw new Exception("Failed to run deserialization for version " + testDescription.Name, e);
             }
         }
 
+        static IEnumerable<TestDescription> NServiceBusVersions()
+        {
+            var projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
+            var allDirectories = Directory.GetDirectories(projectDirectory);
+            var regex = new Regex(@"NServiceBus\d+\.\d+");
 
+            foreach (var directory in allDirectories)
+            {
+                var match = regex.Match(directory);
+                if (match.Success)
+                {
+                    var versionName = match.Groups[0];
+
+                    var platforms = Directory.GetDirectories(Path.Combine(directory, "bin", ConfigurationFolder))
+                        .Where(p => !p.Contains("netcoreapp")); // currently not supported
+
+                    foreach (var platformPath in platforms)
+                    {
+                        var platformName = platformPath.Split(Path.DirectorySeparatorChar).Last();
+                        yield return new TestDescription(versionName.Value, platformPath, platformName);
+                    }
+                }
+            }
+        }
+
+        public class TestDescription
+        {
+            public TestDescription(string versionName, string directory, string platform)
+            {
+                Name = versionName;
+                Directory = directory;
+                Platform = platform;
+            }
+
+            public string Name { get; }
+            public string Directory { get; }
+            public string Platform { get; }
+
+            public override string ToString()
+            {
+                return $"{Name}, {Platform}";
+            }
+        }
     }
 }
