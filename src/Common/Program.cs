@@ -143,7 +143,7 @@ class Program
             var version = new ValueTuple<int, int, int>(nsbVersion.FileMajorPart, nsbVersion.FileMinorPart, nsbVersion.FileBuildPart);
             if (testCase.IsSupported(serializationFormat, version))
             {
-                yield return (TestCase) Activator.CreateInstance(testType);
+                yield return testCase;
             }
         }
     }
