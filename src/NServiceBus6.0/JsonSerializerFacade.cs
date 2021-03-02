@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Common;
+using Common.Tests;
 using NServiceBus;
 using NServiceBus.MessageInterfaces.MessageMapper.Reflection;
 using NServiceBus.Serialization;
@@ -16,6 +17,8 @@ class JsonSerializerFacade : ISerializerFacade
         serializer = new JsonSerializer().Configure(settings)(mapper);
         mapper.Initialize(objectTypes);
     }
+
+    public SerializationFormat serializationFormat => SerializationFormat.Json;
 
     public void Serialize(Stream stream, object instance)
     {

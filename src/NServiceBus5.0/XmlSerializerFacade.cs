@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Common;
+using Common.Tests;
 using NServiceBus;
 using NServiceBus.MessageInterfaces.MessageMapper.Reflection;
 using NServiceBus.Serializers.XML;
@@ -14,6 +15,8 @@ class XmlSerializerFacade : ISerializerFacade
         mapper.Initialize(objectTypes);
         serializer.Initialize(objectTypes);
     }
+
+    public SerializationFormat serializationFormat => SerializationFormat.Xml;
 
     public void Serialize(Stream stream, object instance)
     {

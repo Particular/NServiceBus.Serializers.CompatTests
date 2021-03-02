@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Common;
+using Common.Tests;
 using NServiceBus;
 using NServiceBus.MessageInterfaces.MessageMapper.Reflection;
 using NServiceBus.ObjectBuilder;
@@ -18,6 +19,8 @@ class JsonSerializerFacade : ISerializerFacade
 
         SetupTypeHeader(objectTypes);
     }
+
+    public SerializationFormat serializationFormat => SerializationFormat.Json;
 
     public void Serialize(Stream stream, object instance)
     {

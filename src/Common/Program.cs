@@ -10,16 +10,16 @@ using Common.Tests;
 
 class Program
 {
-    static TargetFrameworkAttribute targetFrameworkAttribute = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly()
+    static readonly TargetFrameworkAttribute TargetFrameworkAttribute = (TargetFrameworkAttribute)Assembly.GetExecutingAssembly()
         .GetCustomAttributes(typeof(TargetFrameworkAttribute), false)
         .SingleOrDefault();
+
+    //TODO where should we store the files?
+    static readonly DirectoryInfo TestDirectory = Directory.CreateDirectory(Path.Combine(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()), "temp", "serializer-compat-tests"));
 
     static void Main(string[] args)
     {
         Console.WriteLine("Arguments: " + string.Join(Environment.NewLine, args));
-
-        //TODO where should we store the files?
-        var testDirectory = Directory.CreateDirectory(Path.Combine(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()), "temp", "serializer-compat-tests"));
 
         //TODO determine correct assembly full name to load type
         var jsonSerializerFacade = Type.GetType("JsonSerializerFacade", true);
@@ -34,23 +34,13 @@ class Program
             foreach (var jsonSupportedTestCase in jsonSupportedTestCases)
             {
                 Console.WriteLine($"JSON - {jsonSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = GetTestCaseFolder(testDirectory, jsonSupportedTestCase, SerializationFormat.Json);
-
-                var fileName = GetFileName(testCaseFolder, "json");
-                var serializer = (ISerializerFacade) Activator.CreateInstance(jsonSerializerFacade, jsonSupportedTestCase.MessageType);
-
-                Serialize(serializer, jsonSupportedTestCase, fileName);
+                Serialize(jsonSerializerFacade, jsonSupportedTestCase);
             }
 
             foreach (var xmlSupportedTestCase in xmlSupportedTestCases)
             {
                 Console.WriteLine($"XML - {xmlSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = GetTestCaseFolder(testDirectory, xmlSupportedTestCase, SerializationFormat.Xml);
-
-                var fileName = GetFileName(testCaseFolder, "xml");
-                var serializer = (ISerializerFacade) Activator.CreateInstance(xmlSerializerFacade, xmlSupportedTestCase.MessageType);
-
-                Serialize(serializer, xmlSupportedTestCase, fileName);
+                Serialize(xmlSerializerFacade, xmlSupportedTestCase);
             }
         }
 
@@ -60,7 +50,7 @@ class Program
             foreach (var jsonSupportedTestCase in jsonSupportedTestCases)
             {
                 Console.WriteLine($"JSON - {jsonSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = Path.Combine(testDirectory.FullName, SerializationFormat.Json.ToString("G"), jsonSupportedTestCase.GetType().Name);
+                var testCaseFolder = Path.Combine(TestDirectory.FullName, SerializationFormat.Json.ToString("G"), jsonSupportedTestCase.GetType().Name);
 
                 if (!Directory.Exists(testCaseFolder))
                 {
@@ -86,7 +76,7 @@ class Program
             foreach (var xmlSupportedTestCase in xmlSupportedTestCases)
             {
                 Console.WriteLine($"XML - {xmlSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = Path.Combine(testDirectory.FullName, SerializationFormat.Xml.ToString("G"), xmlSupportedTestCase.GetType().Name);
+                var testCaseFolder = Path.Combine(TestDirectory.FullName, SerializationFormat.Xml.ToString("G"), xmlSupportedTestCase.GetType().Name);
 
                 if (!Directory.Exists(testCaseFolder))
                 {
@@ -124,9 +114,14 @@ class Program
         return testCaseFolder;
     }
 
-    static void Serialize(ISerializerFacade serializer, TestCase testCase, string fileName)
+    static void Serialize(Type serializerType, TestCase testCase)
     {
+        var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
         var testInstance = serializer.CreateInstance(testCase.MessageType);
+
+        var testCaseFolder = GetTestCaseFolder(TestDirectory, testCase, serializer.serializationFormat);
+        var fileName = GetFileName(testCaseFolder, serializer.serializationFormat.ToString("G").ToLower());
+
         using (var stream = new FileStream(fileName, FileMode.Create))
         {
             serializer.Serialize(stream, testInstance);
@@ -134,7 +129,7 @@ class Program
         }
     }
 
-    static string GetFileName(string testCaseFolder, string fileExtension) => Path.Combine(testCaseFolder, $"{Assembly.GetExecutingAssembly().GetName().Name} {targetFrameworkAttribute.FrameworkDisplayName}.{fileExtension}");
+    static string GetFileName(string testCaseFolder, string fileExtension) => Path.Combine(testCaseFolder, $"{Assembly.GetExecutingAssembly().GetName().Name} {TargetFrameworkAttribute.FrameworkDisplayName}.{fileExtension}");
 
     static IEnumerable<TestCase> GetTestCasesMatchingCurrentVersion(SerializationFormat serializationFormat)
     {
