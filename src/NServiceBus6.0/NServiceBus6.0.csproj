@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net452</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net452</TargetFramework>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
@@ -11,6 +12,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Common\Common.csproj" />
-	</ItemGroup>	
+	</ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Common\Program.cs" Link="Program.cs" />
+  </ItemGroup>
 
 </Project>
