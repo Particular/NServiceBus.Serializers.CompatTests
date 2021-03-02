@@ -50,45 +50,33 @@ class Program
             foreach (var jsonSupportedTestCase in jsonSupportedTestCases)
             {
                 Console.WriteLine($"JSON - {jsonSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = GetTestCaseFolder(jsonSupportedTestCase, SerializationFormat.Json);
 
-                var files = Directory.GetFiles(testCaseFolder);
-
-                var serializer = (ISerializerFacade) Activator.CreateInstance(jsonSerializerFacade, jsonSupportedTestCase.MessageType);
-                var expectedValues = serializer.CreateInstance(jsonSupportedTestCase.MessageType);
-
-                foreach (var file in files)
-                {
-                    using (var stream = new FileStream(file, FileMode.Open))
-                    {
-                        var deserializedType = serializer.Deserialize(stream).First();
-
-                        jsonSupportedTestCase.CheckIfAreEqual(deserializedType, expectedValues);
-                    }
-                }
+                DeserializeAndVerify(jsonSerializerFacade, jsonSupportedTestCase);
             }
 
             foreach (var xmlSupportedTestCase in xmlSupportedTestCases)
             {
                 Console.WriteLine($"XML - {xmlSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = GetTestCaseFolder(xmlSupportedTestCase, SerializationFormat.Xml);
-
-                var files = Directory.GetFiles(testCaseFolder);
-
-                var serializer = (ISerializerFacade) Activator.CreateInstance(xmlSerializerFacade, xmlSupportedTestCase.MessageType);
-                var expectedValues = serializer.CreateInstance(xmlSupportedTestCase.MessageType);
-
-                foreach (var file in files)
-                {
-                    using (var stream = new FileStream(file, FileMode.Open))
-                    {
-                        var deserializedType = serializer.Deserialize(stream).First();
-
-                        xmlSupportedTestCase.CheckIfAreEqual(deserializedType, expectedValues);
-                    }
-                }
+                DeserializeAndVerify(xmlSerializerFacade, xmlSupportedTestCase);
             }
+        }
+    }
 
+    static void DeserializeAndVerify(Type serializerType, TestCase testCase)
+    {
+        var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
+        var expectedValues = serializer.CreateInstance(testCase.MessageType);
+
+        var testCaseFolder = GetTestCaseFolder(testCase, serializer.serializationFormat);
+        var files = Directory.GetFiles(testCaseFolder);
+        foreach (var file in files)
+        {
+            using (var stream = new FileStream(file, FileMode.Open))
+            {
+                var deserializedType = serializer.Deserialize(stream).First();
+
+                testCase.CheckIfAreEqual(deserializedType, expectedValues);
+            }
         }
     }
 
