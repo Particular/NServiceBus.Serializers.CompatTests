@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <Compile Include="..\Common\Program.cs" Link="Program.cs" />
-    <Compile Include="..\NServiceBus6\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
-    <Compile Include="..\NServiceBus6\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
+    <Compile Include="..\NServiceBus6.0\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
+    <Compile Include="..\NServiceBus6.0\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
   </ItemGroup>
 
   <ItemGroup>
