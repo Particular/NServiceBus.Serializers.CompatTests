@@ -10,7 +10,7 @@
 
         public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version)
         {
-            return !(version.Major != 3 && version.Minor == 3);
+            return version.Major != 3;
         }
 
         public override void Populate(object instance)
