@@ -50,12 +50,7 @@ class Program
             foreach (var jsonSupportedTestCase in jsonSupportedTestCases)
             {
                 Console.WriteLine($"JSON - {jsonSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = Path.Combine(TestDirectory.FullName, SerializationFormat.Json.ToString("G"), jsonSupportedTestCase.GetType().Name);
-
-                if (!Directory.Exists(testCaseFolder))
-                {
-                    Directory.CreateDirectory(testCaseFolder);
-                }
+                var testCaseFolder = GetTestCaseFolder(jsonSupportedTestCase, SerializationFormat.Json);
 
                 var files = Directory.GetFiles(testCaseFolder);
 
@@ -76,12 +71,7 @@ class Program
             foreach (var xmlSupportedTestCase in xmlSupportedTestCases)
             {
                 Console.WriteLine($"XML - {xmlSupportedTestCase.MessageType.Name}");
-                var testCaseFolder = Path.Combine(TestDirectory.FullName, SerializationFormat.Xml.ToString("G"), xmlSupportedTestCase.GetType().Name);
-
-                if (!Directory.Exists(testCaseFolder))
-                {
-                    Directory.CreateDirectory(testCaseFolder);
-                }
+                var testCaseFolder = GetTestCaseFolder(xmlSupportedTestCase, SerializationFormat.Xml);
 
                 var files = Directory.GetFiles(testCaseFolder);
 
@@ -102,9 +92,9 @@ class Program
         }
     }
 
-    static string GetTestCaseFolder(DirectoryInfo testDirectory, TestCase testCase, SerializationFormat serializationFormat)
+    static string GetTestCaseFolder(TestCase testCase, SerializationFormat serializationFormat)
     {
-        var testCaseFolder = Path.Combine(testDirectory.FullName, serializationFormat.ToString("G"), testCase.GetType().Name);
+        var testCaseFolder = Path.Combine(TestDirectory.FullName, serializationFormat.ToString("G"), testCase.GetType().Name);
 
         if (!Directory.Exists(testCaseFolder))
         {
@@ -119,7 +109,7 @@ class Program
         var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
         var testInstance = serializer.CreateInstance(testCase.MessageType);
 
-        var testCaseFolder = GetTestCaseFolder(TestDirectory, testCase, serializer.serializationFormat);
+        var testCaseFolder = GetTestCaseFolder(testCase, serializer.serializationFormat);
         var fileName = GetFileName(testCaseFolder, serializer.serializationFormat.ToString("G").ToLower());
 
         using (var stream = new FileStream(fileName, FileMode.Create))
