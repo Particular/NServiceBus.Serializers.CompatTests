@@ -20,7 +20,7 @@ class JsonSerializerFacade : ISerializerFacade
         SetupTypeHeader(objectTypes);
     }
 
-    public SerializationFormat serializationFormat => SerializationFormat.Json;
+    public SerializationFormat SerializationFormat => SerializationFormat.Json;
 
     public void Serialize(Stream stream, object instance)
     {

@@ -17,7 +17,7 @@ class XmlSerializerFacade : ISerializerFacade
         var settings = new SettingsHolder();
         var conventions = CreateTestConventions(settings);
         // evil hack
-        settings.Set<MessageMetadataRegistry>((MessageMetadataRegistry)Activator.CreateInstance(typeof(MessageMetadataRegistry), BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { conventions}, null));
+        settings.Set<MessageMetadataRegistry>((MessageMetadataRegistry)Activator.CreateInstance(typeof(MessageMetadataRegistry), BindingFlags.NonPublic | BindingFlags.Instance, null, new[] { conventions }, null));
         settings.Set<Conventions>(conventions);
         settings.Set("TypesToScan", objectTypes);
 
@@ -25,8 +25,8 @@ class XmlSerializerFacade : ISerializerFacade
         mapper.Initialize(objectTypes);
     }
 
-    public SerializationFormat serializationFormat => SerializationFormat.Xml;
-    
+    public SerializationFormat SerializationFormat => SerializationFormat.Xml;
+
     public void Serialize(Stream stream, object instance)
     {
         serializer.Serialize(instance, stream);

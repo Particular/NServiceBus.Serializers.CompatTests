@@ -36,9 +36,9 @@ class Program
                 foreach (var testCase in testCases)
                 {
                     var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
-                    if(testCase.IsSupported(serializer.serializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                    if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
                     {
-                        Console.WriteLine($"{serializer.serializationFormat:G} — {testCase.MessageType.Name}");
+                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.MessageType.Name}");
                         Serialize(serializer, testCase);
                     }
                 }
@@ -53,9 +53,9 @@ class Program
                 foreach (var testCase in testCases)
                 {
                     var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
-                    if (testCase.IsSupported(serializer.serializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                    if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
                     {
-                        Console.WriteLine($"{serializer.serializationFormat:G} — {testCase.MessageType.Name}");
+                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.MessageType.Name}");
                         DeserializeAndVerify(serializer, testCase);
                     }
                 }
@@ -68,7 +68,7 @@ class Program
         var expectedValues = serializer.CreateInstance(testCase.MessageType);
         testCase.Populate(expectedValues);
 
-        var testCaseFolder = GetTestCaseFolder(testCase, serializer.serializationFormat);
+        var testCaseFolder = GetTestCaseFolder(testCase, serializer.SerializationFormat);
         var files = Directory.GetFiles(testCaseFolder);
         foreach (var file in files)
         {
@@ -98,8 +98,8 @@ class Program
         var testInstance = serializer.CreateInstance(testCase.MessageType);
         testCase.Populate(testInstance);
 
-        var testCaseFolder = GetTestCaseFolder(testCase, serializer.serializationFormat);
-        var fileName = GetFileName(testCaseFolder, serializer.serializationFormat.ToString("G").ToLower());
+        var testCaseFolder = GetTestCaseFolder(testCase, serializer.SerializationFormat);
+        var fileName = GetFileName(testCaseFolder, serializer.SerializationFormat.ToString("G").ToLower());
 
         using (var stream = new FileStream(fileName, FileMode.Create))
         {

@@ -6,7 +6,7 @@
 
     public interface ISerializerFacade
     {
-        SerializationFormat serializationFormat { get; }
+        SerializationFormat SerializationFormat { get; }
         void Serialize(Stream stream, object instance);
         object[] Deserialize(Stream stream);
         object CreateInstance(Type type);

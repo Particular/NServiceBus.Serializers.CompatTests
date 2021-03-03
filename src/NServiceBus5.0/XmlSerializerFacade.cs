@@ -16,7 +16,7 @@ class XmlSerializerFacade : ISerializerFacade
         serializer.Initialize(objectTypes);
     }
 
-    public SerializationFormat serializationFormat => SerializationFormat.Xml;
+    public SerializationFormat SerializationFormat => SerializationFormat.Xml;
 
     public void Serialize(Stream stream, object instance)
     {
