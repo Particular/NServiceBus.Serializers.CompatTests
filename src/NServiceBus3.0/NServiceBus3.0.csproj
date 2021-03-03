@@ -6,10 +6,8 @@
 		<RootNamespace>NServiceBus3._0</RootNamespace>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="log4net" Version="1.2.10" />
-		<PackageReference Include="NServiceBus" Version="3.0.*" />
-		<PackageReference Include="NServiceBus.Interfaces" Version="3.0.*" />
+	<ItemGroup>		
+		<PackageReference Include="NServiceBus" Version="3.0.*" />		
 	</ItemGroup>
 
 	<ItemGroup>
