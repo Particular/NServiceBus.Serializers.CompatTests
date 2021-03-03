@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -14,57 +13,58 @@ class Program
         .GetCustomAttributes(typeof(TargetFrameworkAttribute), false)
         .SingleOrDefault();
 
-    //TODO where should we store the files?
-    static readonly DirectoryInfo TestDirectory = Directory.CreateDirectory(Path.Combine(Directory.GetDirectoryRoot(Directory.GetCurrentDirectory()), "temp", "serializer-compat-tests"));
+    static readonly FileVersionInfo NsbVersion = FileVersionInfo.GetVersionInfo(Assembly.Load(Assembly.GetCallingAssembly().GetReferencedAssemblies().Single(x => x.Name.Equals("NServiceBus.Core"))).Location);
+
 
     static void Main(string[] args)
     {
         Console.WriteLine("Arguments: " + string.Join(Environment.NewLine, args));
 
-        //TODO determine correct assembly full name to load type
-        var jsonSerializerFacade = Type.GetType("JsonSerializerFacade", true);
-        var xmlSerializerFacade = Type.GetType("XmlSerializerFacade", true);
-
-        var jsonSupportedTestCases = GetTestCasesMatchingCurrentVersion(SerializationFormat.Json);
-        var xmlSupportedTestCases = GetTestCasesMatchingCurrentVersion(SerializationFormat.Xml);
+        var serializers = new[]
+        {
+            //TODO determine correct assembly full name to load type
+            Type.GetType("JsonSerializerFacade", true),
+            Type.GetType("XmlSerializerFacade", true)
+        };
+        var testCases = DiscoverTestCases();
 
         if (args.Contains("Serialize") || args.Length == 0)
         {
             Console.WriteLine("Running Serialization tests for:");
-            foreach (var jsonSupportedTestCase in jsonSupportedTestCases)
+            foreach (var serializerType in serializers)
             {
-                Console.WriteLine($"JSON - {jsonSupportedTestCase.MessageType.Name}");
-                Serialize(jsonSerializerFacade, jsonSupportedTestCase);
-            }
-
-            foreach (var xmlSupportedTestCase in xmlSupportedTestCases)
-            {
-                Console.WriteLine($"XML - {xmlSupportedTestCase.MessageType.Name}");
-                Serialize(xmlSerializerFacade, xmlSupportedTestCase);
+                foreach (var testCase in testCases)
+                {
+                    var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
+                    if(testCase.IsSupported(serializer.serializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                    {
+                        Console.WriteLine($"{serializer.serializationFormat:G} — {testCase.MessageType.Name}");
+                        Serialize(serializer, testCase);
+                    }
+                }
             }
         }
 
         if (args.Contains("Deserialize") || args.Length == 0)
         {
             Console.WriteLine("Running Deserialization tests for:");
-            foreach (var jsonSupportedTestCase in jsonSupportedTestCases)
+            foreach (var serializerType in serializers)
             {
-                Console.WriteLine($"JSON - {jsonSupportedTestCase.MessageType.Name}");
-
-                DeserializeAndVerify(jsonSerializerFacade, jsonSupportedTestCase);
-            }
-
-            foreach (var xmlSupportedTestCase in xmlSupportedTestCases)
-            {
-                Console.WriteLine($"XML - {xmlSupportedTestCase.MessageType.Name}");
-                DeserializeAndVerify(xmlSerializerFacade, xmlSupportedTestCase);
+                foreach (var testCase in testCases)
+                {
+                    var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
+                    if (testCase.IsSupported(serializer.serializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                    {
+                        Console.WriteLine($"{serializer.serializationFormat:G} — {testCase.MessageType.Name}");
+                        DeserializeAndVerify(serializer, testCase);
+                    }
+                }
             }
         }
     }
 
-    static void DeserializeAndVerify(Type serializerType, TestCase testCase)
+    static void DeserializeAndVerify(ISerializerFacade serializer, TestCase testCase)
     {
-        var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
         var expectedValues = serializer.CreateInstance(testCase.MessageType);
         testCase.Populate(expectedValues);
 
@@ -83,7 +83,7 @@ class Program
 
     static string GetTestCaseFolder(TestCase testCase, SerializationFormat serializationFormat)
     {
-        var testCaseFolder = Path.Combine(TestDirectory.FullName, serializationFormat.ToString("G"), testCase.GetType().Name);
+        var testCaseFolder = Path.Combine(Settings.TestDirectory.FullName, serializationFormat.ToString("G"), testCase.GetType().Name);
 
         if (!Directory.Exists(testCaseFolder))
         {
@@ -93,9 +93,8 @@ class Program
         return testCaseFolder;
     }
 
-    static void Serialize(Type serializerType, TestCase testCase)
+    static void Serialize(ISerializerFacade serializer, TestCase testCase)
     {
-        var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
         var testInstance = serializer.CreateInstance(testCase.MessageType);
         testCase.Populate(testInstance);
 
@@ -111,20 +110,12 @@ class Program
 
     static string GetFileName(string testCaseFolder, string fileExtension) => Path.Combine(testCaseFolder, $"{Assembly.GetExecutingAssembly().GetName().Name} {TargetFrameworkAttribute.FrameworkDisplayName}.{fileExtension}");
 
-    static IEnumerable<TestCase> GetTestCasesMatchingCurrentVersion(SerializationFormat serializationFormat)
+    static TestCase[] DiscoverTestCases()
     {
-        var nsbVersion = FileVersionInfo.GetVersionInfo(Assembly.Load(Assembly.GetCallingAssembly().GetReferencedAssemblies().Single(x => x.Name.Equals("NServiceBus.Core"))).Location);
         var testCaseType = typeof(TestCase);
-        var testTypes=  testCaseType.Assembly.GetTypes().Where(p => testCaseType.IsAssignableFrom(p) && testCaseType != p);
-        foreach (var testType in testTypes)
-        {
-            var testCase = (TestCase) Activator.CreateInstance(testType);
-
-            var version = new ValueTuple<int, int, int>(nsbVersion.FileMajorPart, nsbVersion.FileMinorPart, nsbVersion.FileBuildPart);
-            if (testCase.IsSupported(serializationFormat, version))
-            {
-                yield return testCase;
-            }
-        }
+        var testTypes = testCaseType.Assembly.GetTypes()
+            .Where(p => testCaseType.IsAssignableFrom(p) && p != testCaseType)
+            .Select(p => (TestCase)Activator.CreateInstance(p));
+        return testTypes.ToArray();
     }
 }

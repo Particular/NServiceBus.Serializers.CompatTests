@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<TargetFramework>net452</TargetFramework>
 		<IsPackable>false</IsPackable>
-		<LangVersion>7</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
