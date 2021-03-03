@@ -20,6 +20,8 @@
         [TestCaseSource(nameof(NServiceBusVersions)), Order(1)]
         public void Serialize(TestDescription testDescription)
         {
+            //TODO: Clean the target directory first.
+
             var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
             try
             {
