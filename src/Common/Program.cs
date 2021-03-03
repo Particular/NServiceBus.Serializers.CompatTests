@@ -66,6 +66,7 @@ class Program
     {
         var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
         var expectedValues = serializer.CreateInstance(testCase.MessageType);
+        testCase.Populate(expectedValues);
 
         var testCaseFolder = GetTestCaseFolder(testCase, serializer.serializationFormat);
         var files = Directory.GetFiles(testCaseFolder);
@@ -96,6 +97,7 @@ class Program
     {
         var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
         var testInstance = serializer.CreateInstance(testCase.MessageType);
+        testCase.Populate(testInstance);
 
         var testCaseFolder = GetTestCaseFolder(testCase, serializer.serializationFormat);
         var fileName = GetFileName(testCaseFolder, serializer.serializationFormat.ToString("G").ToLower());
