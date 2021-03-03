@@ -9,7 +9,7 @@
 
 
 
-    [TestFixture]
+    [TestFixture, Ignore("disabled")]
     [Category("All")]
     public class SerializationCompatibilityTests
     {
