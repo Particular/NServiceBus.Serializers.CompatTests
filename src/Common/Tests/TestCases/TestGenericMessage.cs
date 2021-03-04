@@ -4,8 +4,6 @@
     using NUnit.Framework;
     using Types;
 
-    [Explicit]
-    [Ignore("Need to investigate why generic messages are not properly working with xml serialization")]
     public class TestGenericMessage : TestCase
     {
         public override Type MessageType => typeof(GenericMessage<int, string>);
