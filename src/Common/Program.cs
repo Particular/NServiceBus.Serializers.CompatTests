@@ -17,6 +17,7 @@ class Program
 
     static void Main(string[] args)
     {
+        Console.WriteLine($"Running NServiceBus {NsbVersion.FileMajorPart}.{NsbVersion.FileMinorPart}.{NsbVersion.FileBuildPart}");
         Console.WriteLine("Arguments: " + string.Join(Environment.NewLine, args));
 
         var serializers = new[]
@@ -36,7 +37,7 @@ class Program
                     var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
                     if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
                     {
-                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.MessageType.Name}");
+                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
                         Serialize(serializer, testCase);
                     }
                 }
@@ -53,7 +54,7 @@ class Program
                     var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
                     if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
                     {
-                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.MessageType.Name}");
+                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
                         DeserializeAndVerify(serializer, testCase);
                     }
                 }
