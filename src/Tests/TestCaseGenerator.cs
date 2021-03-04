@@ -1,4 +1,4 @@
-﻿namespace Tests.CompatibilityTests
+﻿namespace Tests
 {
     using System;
     using System.Collections.Generic;
