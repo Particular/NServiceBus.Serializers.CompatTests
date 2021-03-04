@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus3", "NServiceBus3.0\NServiceBus3.0.csproj", "{17FD8B87-AB4D-4663-8C9F-A3B1213D046D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus3.0", "NServiceBus3.0\NServiceBus3.0.csproj", "{17FD8B87-AB4D-4663-8C9F-A3B1213D046D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{572499ED-E234-4C66-BD6E-D5A845065C5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4", "NServiceBus4.0\NServiceBus4.0.csproj", "{2428412D-C9C5-4006-BFC4-DF7CCB90B12E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.0", "NServiceBus4.0\NServiceBus4.0.csproj", "{2428412D-C9C5-4006-BFC4-DF7CCB90B12E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus5", "NServiceBus5.0\NServiceBus5.0.csproj", "{BE2C7B5E-7A71-4B0C-9020-343ED2010993}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus5.0", "NServiceBus5.0\NServiceBus5.0.csproj", "{BE2C7B5E-7A71-4B0C-9020-343ED2010993}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6", "NServiceBus6.0\NServiceBus6.0.csproj", "{10D11044-C92C-42AD-830E-57012FF4F039}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6.0", "NServiceBus6.0\NServiceBus6.0.csproj", "{10D11044-C92C-42AD-830E-57012FF4F039}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{FEAAE402-8ED0-47FB-8E54-42B1D7F654CC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -27,37 +27,35 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6.1", "NServiceB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6.2", "NServiceBus6.2\NServiceBus6.2.csproj", "{EC85911C-67FA-4E69-8D22-AC69EA436929}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6.Common", "NServiceBus6.Common\NServiceBus6.Common.csproj", "{6C13196B-D5A0-4F0D-B982-0C91BBDDAAED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6.3", "NServiceBus6.3\NServiceBus6.3.csproj", "{0E80F689-6045-4916-BE02-ACBB9E7CEE67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus6.3", "NServiceBus6.3\NServiceBus6.3.csproj", "{0E80F689-6045-4916-BE02-ACBB9E7CEE67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6.4", "NServiceBus6.4\NServiceBus6.4.csproj", "{DBA74493-AFC0-4084-993B-1DB8253E1C03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus6.4", "NServiceBus6.4\NServiceBus6.4.csproj", "{DBA74493-AFC0-4084-993B-1DB8253E1C03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus6.5", "NServiceBus6.5\NServiceBus6.5.csproj", "{0A6EC4ED-62BC-4EFC-BE72-148B292FB92F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus6.5", "NServiceBus6.5\NServiceBus6.5.csproj", "{0A6EC4ED-62BC-4EFC-BE72-148B292FB92F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus5.1", "NServiceBus5.1\NServiceBus5.1.csproj", "{5BE12FCC-DD1E-477F-9FF4-ED20098CEEC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus5.1", "NServiceBus5.1\NServiceBus5.1.csproj", "{5BE12FCC-DD1E-477F-9FF4-ED20098CEEC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus5.2", "NServiceBus5.2\NServiceBus5.2.csproj", "{B36E98F4-0CEE-4744-A74E-DB8C42578C88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus5.2", "NServiceBus5.2\NServiceBus5.2.csproj", "{B36E98F4-0CEE-4744-A74E-DB8C42578C88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.1", "NServiceBus4.1\NServiceBus4.1.csproj", "{8971C23B-8A58-47F2-8198-60E8F3EAC03E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus4.1", "NServiceBus4.1\NServiceBus4.1.csproj", "{8971C23B-8A58-47F2-8198-60E8F3EAC03E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus3.1", "NServiceBus3.1\NServiceBus3.1.csproj", "{B9ECCDAF-123A-4EE9-B44A-4059B51F04F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus3.1", "NServiceBus3.1\NServiceBus3.1.csproj", "{B9ECCDAF-123A-4EE9-B44A-4059B51F04F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus3.2", "NServiceBus3.2\NServiceBus3.2.csproj", "{98BD4789-0693-400D-B41C-F2378957B4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus3.2", "NServiceBus3.2\NServiceBus3.2.csproj", "{98BD4789-0693-400D-B41C-F2378957B4B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus3.3", "NServiceBus3.3\NServiceBus3.3.csproj", "{2AAE9E2B-0E00-475D-A06B-12D29E24B699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus3.3", "NServiceBus3.3\NServiceBus3.3.csproj", "{2AAE9E2B-0E00-475D-A06B-12D29E24B699}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.2", "NServiceBus4.2\NServiceBus4.2.csproj", "{2F1191B6-49DA-47DE-B187-2BFACA4E99F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus4.2", "NServiceBus4.2\NServiceBus4.2.csproj", "{2F1191B6-49DA-47DE-B187-2BFACA4E99F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.3", "NServiceBus4.3\NServiceBus4.3.csproj", "{19B520BF-BF38-4BA1-A28C-1FE60DCC8088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus4.3", "NServiceBus4.3\NServiceBus4.3.csproj", "{19B520BF-BF38-4BA1-A28C-1FE60DCC8088}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.4", "NServiceBus4.4\NServiceBus4.4.csproj", "{C1686476-7C1B-4A7B-B917-75E08B3ADDF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus4.4", "NServiceBus4.4\NServiceBus4.4.csproj", "{C1686476-7C1B-4A7B-B917-75E08B3ADDF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.5", "NServiceBus4.5\NServiceBus4.5.csproj", "{3616903F-1B45-4227-B50C-BEF1DDA22DD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus4.5", "NServiceBus4.5\NServiceBus4.5.csproj", "{3616903F-1B45-4227-B50C-BEF1DDA22DD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.6", "NServiceBus4.6\NServiceBus4.6.csproj", "{346AE9EE-8380-4AA4-B843-348F90579957}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus4.6", "NServiceBus4.6\NServiceBus4.6.csproj", "{346AE9EE-8380-4AA4-B843-348F90579957}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus4.7", "NServiceBus4.7\NServiceBus4.7.csproj", "{746DD407-533E-432B-95EF-AD6040990982}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus4.7", "NServiceBus4.7\NServiceBus4.7.csproj", "{746DD407-533E-432B-95EF-AD6040990982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,10 +95,6 @@ Global
 		{EC85911C-67FA-4E69-8D22-AC69EA436929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC85911C-67FA-4E69-8D22-AC69EA436929}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC85911C-67FA-4E69-8D22-AC69EA436929}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C13196B-D5A0-4F0D-B982-0C91BBDDAAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C13196B-D5A0-4F0D-B982-0C91BBDDAAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C13196B-D5A0-4F0D-B982-0C91BBDDAAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C13196B-D5A0-4F0D-B982-0C91BBDDAAED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E80F689-6045-4916-BE02-ACBB9E7CEE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E80F689-6045-4916-BE02-ACBB9E7CEE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E80F689-6045-4916-BE02-ACBB9E7CEE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
