@@ -10,6 +10,11 @@
     {
         public override Type MessageType => typeof(MessageWithDictionaries);
 
+        public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version)
+        {
+            return version.Major > 3 || (version.Major == 3 && version.Minor == 3);
+        }
+
         public override void Populate(object instance)
         {
             var dictionary = (MessageWithDictionaries)instance;
