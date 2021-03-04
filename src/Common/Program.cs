@@ -69,8 +69,14 @@ class Program
 
         var testCaseFolder = GetTestCaseFolder(testCase, serializer.SerializationFormat);
         var files = Directory.GetFiles(testCaseFolder);
+        if (files.Length == 0)
+        {
+            throw new Exception(
+                "No available files to deserialize. Make sure to run the serialization test case first.");
+        }
         foreach (var file in files)
         {
+            Console.WriteLine("\tDeserializing " + Path.GetFileName(file));
             using (var stream = new FileStream(file, FileMode.Open))
             {
                 var deserializedType = serializer.Deserialize(stream).First();
