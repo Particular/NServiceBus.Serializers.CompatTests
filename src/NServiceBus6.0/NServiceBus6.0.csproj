@@ -3,7 +3,7 @@
 	<PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net452</TargetFramework>
-		<IsPackable>false</IsPackable>
+    <RootNamespace>NServiceBus6._0</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>		
