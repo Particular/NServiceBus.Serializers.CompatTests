@@ -113,7 +113,7 @@ class Program
     {
         var testCaseType = typeof(TestCase);
         var testTypes = testCaseType.Assembly.GetTypes()
-            .Where(p => testCaseType.IsAssignableFrom(p) && p != testCaseType)
+            .Where(p => p.IsSubclassOf(testCaseType))
             .Select(p => (TestCase)Activator.CreateInstance(p));
         return testTypes.ToArray();
     }
