@@ -15,14 +15,12 @@ class Program
 
     static readonly FileVersionInfo NsbVersion = FileVersionInfo.GetVersionInfo(Assembly.Load(Assembly.GetCallingAssembly().GetReferencedAssemblies().Single(x => x.Name.Equals("NServiceBus.Core"))).Location);
 
-
     static void Main(string[] args)
     {
         Console.WriteLine("Arguments: " + string.Join(Environment.NewLine, args));
 
         var serializers = new[]
         {
-            //TODO determine correct assembly full name to load type
             Type.GetType("JsonSerializerFacade", true),
             Type.GetType("XmlSerializerFacade", true)
         };
