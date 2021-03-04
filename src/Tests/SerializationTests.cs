@@ -26,13 +26,15 @@
             try
             {
                 await Cli.Wrap(execPath).WithArguments("Serialize").WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput)).WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput)).ExecuteAsync();
-                Console.WriteLine(standardOutput.ToString());
             }
             catch (Exception e)
             {
-                TestContext.WriteLine(e);
-                Console.WriteLine(errorOutput.ToString());
                 throw new Exception("Failed to run serialization for version " + testDescription.Name, e);
+            }
+            finally
+            {
+                Console.WriteLine(errorOutput.ToString());
+                Console.WriteLine(standardOutput.ToString());
             }
         }
     }
