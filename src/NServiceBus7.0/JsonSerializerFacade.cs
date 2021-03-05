@@ -22,10 +22,7 @@ class JsonSerializerFacade : ISerializerFacade
 
     public void Serialize(Stream stream, object instance)
     {
-        serializer.Serialize(new[]
-        {
-            instance
-        }, stream);
+        serializer.Serialize(instance, stream);
     }
 
     public object[] Deserialize(Stream stream)
