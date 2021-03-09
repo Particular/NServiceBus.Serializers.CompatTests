@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.Versioning;
 using Common;
 using Common.Tests;
+using NUnit.Framework;
 
 class Program
 {
@@ -30,35 +31,45 @@ class Program
         if (args.Contains("Serialize") || args.Length == 0)
         {
             Console.WriteLine("Running Serialization tests for:");
-            foreach (var serializerType in serializers)
+            Assert.Multiple(() =>
             {
-                foreach (var testCase in testCases)
+                foreach (var serializerType in serializers)
                 {
-                    var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
-                    if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                    foreach (var testCase in testCases)
                     {
-                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
-                        Serialize(serializer, testCase);
+                        var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
+                        if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                        {
+                            Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
+                            Serialize(serializer, testCase);
+                        }
                     }
                 }
-            }
+            });
         }
 
         if (args.Contains("Deserialize") || args.Length == 0)
         {
             Console.WriteLine("Running Deserialization tests for:");
-            foreach (var serializerType in serializers)
-            {
-                foreach (var testCase in testCases)
+            Assert.Multiple(() =>
                 {
-                    var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
-                    if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                    foreach (var serializerType in serializers)
                     {
-                        Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
-                        DeserializeAndVerify(serializer, testCase);
+                        foreach (var testCase in testCases)
+                        {
+                            var serializer =
+                                (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
+                            if (testCase.IsSupported(serializer.SerializationFormat,
+                                new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart,
+                                    NsbVersion.FileBuildPart)))
+                            {
+                                Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
+                                DeserializeAndVerify(serializer, testCase);
+                            }
+                        }
                     }
                 }
-            }
+            );
         }
     }
 
