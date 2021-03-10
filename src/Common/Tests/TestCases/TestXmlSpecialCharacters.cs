@@ -8,7 +8,7 @@
     {
         public override Type MessageType => typeof(TestMessageWithChar);
 
-        public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version)
+        public override bool IsSupported(SerializationFormat format, PackageVersion version)
         {
             return version.Major != 3;
         }

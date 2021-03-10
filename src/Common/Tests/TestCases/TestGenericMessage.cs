@@ -8,7 +8,7 @@
     {
         public override Type MessageType => typeof(GenericMessage<int, string>);
 
-        public override bool IsSupported(SerializationFormat format, ValueTuple<int, int, int> version)
+        public override bool IsSupported(SerializationFormat format, PackageVersion version)
         {
             if (format == SerializationFormat.Xml)
             {
