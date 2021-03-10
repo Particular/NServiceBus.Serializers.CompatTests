@@ -38,7 +38,7 @@ class Program
                     foreach (var testCase in testCases)
                     {
                         var serializer = (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
-                        if (testCase.IsSupported(serializer.SerializationFormat, new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
+                        if (testCase.IsSupported(serializer.SerializationFormat, new PackageVersion(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart, NsbVersion.FileBuildPart)))
                         {
                             Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
                             Serialize(serializer, testCase);
@@ -60,7 +60,7 @@ class Program
                             var serializer =
                                 (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
                             if (testCase.IsSupported(serializer.SerializationFormat,
-                                new ValueTuple<int, int, int>(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart,
+                                new PackageVersion(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart,
                                     NsbVersion.FileBuildPart)))
                             {
                                 Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");

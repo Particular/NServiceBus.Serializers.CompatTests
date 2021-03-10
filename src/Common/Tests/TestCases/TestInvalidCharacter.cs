@@ -9,7 +9,7 @@
     {
         public override Type MessageType => typeof(MessageWithInvalidCharacter);
 
-        public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version)
+        public override bool IsSupported(SerializationFormat format, PackageVersion version)
         {
             return version.Major != 3;
         }

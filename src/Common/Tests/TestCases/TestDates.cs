@@ -6,7 +6,7 @@
 
     public class TestDates : TestCase
     {
-        public override bool IsSupported(SerializationFormat format, (int Major, int Minor, int Patch) version)
+        public override bool IsSupported(SerializationFormat format, PackageVersion version)
         {
             if (format != SerializationFormat.Json)
             {
