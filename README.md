@@ -48,3 +48,7 @@ To add a new version to test, follow these steps:
 The tests are triggered by:
 * A weekly schedule
 * Whenever a new (latest) package of `NServiceBus` or `NServiceBus.Newtonsoft.Json` has been pushed to the company's myget feed.
+
+## Dependencies
+
+The test projects reference diffenret Major.Minor versions of NServicebus. In those projects version of NServiceBus should not be updated. The following [command was used](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/23#issuecomment-797354551) to make dependabot ignore NServiceBus updates in this repository. If it proves to be inefficient dependabot could be disabled as in [the following PR](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/32)
