@@ -16,6 +16,8 @@ class Program
 
     static readonly FileVersionInfo NsbVersion = FileVersionInfo.GetVersionInfo(Assembly.Load(Assembly.GetCallingAssembly().GetReferencedAssemblies().Single(x => x.Name.Equals("NServiceBus.Core"))).Location);
 
+    static readonly Excludes ExcludeList = Excludes.BuildExcludes();
+
     static void Main(string[] args)
     {
         Console.WriteLine($"Running NServiceBus {NsbVersion.FileMajorPart}.{NsbVersion.FileMinorPart}.{NsbVersion.FileBuildPart}");
@@ -85,10 +87,18 @@ class Program
             throw new Exception(
                 "No available files to deserialize. Make sure to run the serialization test case first.");
         }
-        foreach (var file in files)
+
+        foreach (var filePath in files)
         {
-            Console.WriteLine("\tDeserializing " + Path.GetFileName(file));
-            using (var stream = new FileStream(file, FileMode.Open))
+            string fileName = Path.GetFileName(filePath);
+            if (ExcludeList.Contains(testCase, fileName))
+            {
+                Console.WriteLine($"\tSkipping {fileName} because it was excluded");
+                continue;
+            }
+
+            Console.WriteLine("\tDeserializing " + fileName);
+            using (var stream = new FileStream(filePath, FileMode.Open))
             {
                 var deserializedType = serializer.Deserialize(stream).First();
 
@@ -115,8 +125,8 @@ class Program
         testCase.Populate(testInstance);
 
         var testCaseFolder = GetTestCaseFolder(testCase, serializer.SerializationFormat);
-        var fileName = GetFileName(testCaseFolder, serializer.SerializationFormat.ToString("G").ToLower());
 
+        var fileName = GetFileName(testCaseFolder, serializer.SerializationFormat.ToString("G").ToLower());
         using (var stream = new FileStream(fileName, FileMode.Create))
         {
             serializer.Serialize(stream, testInstance);
