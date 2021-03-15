@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="7.0.*" />
+    <PackageReference Include="NServiceBus" Version="7.4.*" />
     <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.*" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\Common\Program.cs" Link="Program.cs" />
+    <Compile Include="..\NServiceBus7.0\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
+    <Compile Include="..\NServiceBus7.0\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
+    <Compile Include="..\NServiceBus7.0\ExcludeList.cs" Link="ExcludeList.cs" />
   </ItemGroup>
 
   <ItemGroup>
