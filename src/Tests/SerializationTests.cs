@@ -20,12 +20,26 @@
         [TestCaseSource(typeof(TestCaseGenerator), nameof(TestCaseGenerator.NServiceBusVersions))]
         public async Task Serialize(TestDescription testDescription)
         {
-            var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
             var standardOutput = new StringBuilder();
             var errorOutput = new StringBuilder();
             try
             {
-                await Cli.Wrap(execPath).WithArguments("Serialize").WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput)).WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput)).ExecuteAsync();
+                if (testDescription.Platform.StartsWith("netcoreapp"))
+                {
+                    await Cli.Wrap("dotnet")
+                        .WithArguments("run -- Serialize")
+                        .WithWorkingDirectory(Path.Combine(testDescription.Directory, "..\\..\\.."))
+                        .WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput))
+                        .WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput))
+                        .ExecuteAsync();
+                }
+                else
+                {
+                    var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
+                    await Cli.Wrap(execPath)
+                        .WithArguments("Serialize")
+                        .WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput)).WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput)).ExecuteAsync();
+                }
             }
             catch (Exception e)
             {
