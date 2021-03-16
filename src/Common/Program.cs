@@ -97,12 +97,19 @@ class Program
                 continue;
             }
 
-            Console.WriteLine("\tDeserializing " + fileName);
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
-                var deserializedType = serializer.Deserialize(stream).First();
-
-                testCase.CheckIfAreEqual(deserializedType, expectedValues);
+                try
+                {
+                    Console.WriteLine($"\tDeserializing {fileName}");
+                    var deserializedType = serializer.Deserialize(stream).First();
+                    testCase.CheckIfAreEqual(deserializedType, expectedValues);
+                }
+                catch (Exception e) when (!(e is AssertionException))
+                {
+                    Console.WriteLine("\tError: " + e.Message);
+                    Assert.Fail($"Failed deserializing {testCase.GetType().Name} - {fileName}: {e}");
+                }
             }
         }
     }
