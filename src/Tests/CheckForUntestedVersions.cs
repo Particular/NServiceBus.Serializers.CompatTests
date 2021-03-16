@@ -17,12 +17,12 @@
         [Test]
         public async Task Should_test_latest_minor_versions()
         {
-            var versions = await GetAllNServiceBusVersions();
+            var versions = await GetAllNServiceBusVersions().ConfigureAwait(false);
 
             var latestVersions = versions
+                .Where(v => !v.IsPrerelease)
                 .GroupBy(v => v.Version.Major)
                 .Select(group => group
-                    .Where(v => !v.IsPrerelease)
                     .Max());
 
             foreach (var latestVersion in latestVersions)
@@ -38,7 +38,7 @@
         [Test]
         public async Task Should_test_latest_unstable()
         {
-            var versions = await GetAllNServiceBusVersions();
+            var versions = await GetAllNServiceBusVersions().ConfigureAwait(false);
 
             var latestPrerelease = versions.Where(v => v.IsPrerelease).Max();
 
@@ -49,7 +49,7 @@
             }
         }
 
-        private static async Task<NuGetVersion[]> GetAllNServiceBusVersions()
+        static async Task<NuGetVersion[]> GetAllNServiceBusVersions()
         {
             var repository = Repository.Factory.GetCoreV3("https://www.myget.org/F/particular/api/v3/index.json");
             var result = await repository.GetResourceAsync<FindPackageByIdResource>()
@@ -60,7 +60,7 @@
             return versions;
         }
 
-        private readonly string projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
-        private static readonly SourceCacheContext Cache = new SourceCacheContext();
+        readonly string projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
+        static readonly SourceCacheContext Cache = new SourceCacheContext();
     }
 }
