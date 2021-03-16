@@ -23,7 +23,6 @@ class XmlSerializerFacade : ISerializerFacade
             new object[] { new Func<Type, bool>(conventions.IsMessageType) },
             null));
         settings.Set(conventions);
-        settings.Set("TypesToScan", objectTypes);
 
         serializer = new XmlSerializer().Configure(settings)(mapper);
         mapper.Initialize(objectTypes);
