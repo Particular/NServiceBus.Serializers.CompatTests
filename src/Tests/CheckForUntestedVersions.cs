@@ -20,9 +20,9 @@
             var versions = await GetAllNServiceBusVersions().ConfigureAwait(false);
 
             var latestVersions = versions
+                .Where(v => !v.IsPrerelease)
                 .GroupBy(v => v.Version.Major)
                 .Select(group => group
-                    .Where(v => !v.IsPrerelease)
                     .Max());
 
             foreach (var latestVersion in latestVersions)
