@@ -28,7 +28,6 @@
                     var versionName = match.Groups[0];
 
                     var platforms = Directory.GetDirectories(Path.Combine(directory, "bin", ConfigurationFolder));
-                    //.Where(p => !p.Contains("netcoreapp")); // currently not supported
 
                     foreach (var platformPath in platforms)
                     {

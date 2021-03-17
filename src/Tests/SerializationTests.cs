@@ -20,14 +20,16 @@
         [TestCaseSource(typeof(TestCaseGenerator), nameof(TestCaseGenerator.NServiceBusVersions))]
         public async Task Serialize(TestDescription testDescription)
         {
+            var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
             var standardOutput = new StringBuilder();
             var errorOutput = new StringBuilder();
             try
             {
-                var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
                 await Cli.Wrap(execPath)
                     .WithArguments("Serialize")
-                    .WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput)).WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput)).ExecuteAsync();
+                    .WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput))
+                    .WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput))
+                    .ExecuteAsync();
             }
             catch (Exception e)
             {
