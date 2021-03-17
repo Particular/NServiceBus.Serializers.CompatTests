@@ -25,7 +25,11 @@
             var errorOutput = new StringBuilder();
             try
             {
-                await Cli.Wrap(execPath).WithArguments("Serialize").WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput)).WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput)).ExecuteAsync();
+                await Cli.Wrap(execPath)
+                    .WithArguments("Serialize")
+                    .WithStandardOutputPipe(PipeTarget.ToStringBuilder(standardOutput))
+                    .WithStandardErrorPipe(PipeTarget.ToStringBuilder(errorOutput))
+                    .ExecuteAsync();
             }
             catch (Exception e)
             {

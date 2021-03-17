@@ -2,7 +2,7 @@
 {
     using System;
 
-    public abstract class TestCase : MarshalByRefObject
+    public abstract class TestCase
     {
         public abstract Type MessageType { get; }
 
