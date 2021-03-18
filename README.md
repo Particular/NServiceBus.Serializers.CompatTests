@@ -51,4 +51,4 @@ The tests are triggered by:
 
 ## Dependencies
 
-The test projects reference diffenret Major.Minor versions of NServicebus. In those projects version of NServiceBus should not be updated. The following [command was used](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/23#issuecomment-797354551) to make dependabot ignore NServiceBus updates in this repository. If it proves to be inefficient dependabot could be disabled as in [the following PR](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/32)
+The test projects reference different Major.Minor versions of NServicebus. In those projects, NServiceBus packages should not be updated. The following [command was used](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/23#issuecomment-797354551) to make dependabot ignore NServiceBus updates in this repository. If it proves to be inefficient dependabot could be disabled as in [the following PR](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/32)
