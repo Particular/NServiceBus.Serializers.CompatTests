@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="8.0.0-alpha.*" />
+    <PackageReference Include="NServiceBus" Version="8.0.0.pre.*" />
     <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="3.0.0-alpha.*" />
   </ItemGroup>
 
