@@ -43,6 +43,10 @@ To add a new version to test, follow these steps:
   * Add the classes `JsonSerializerFacade` and `XmlSerializerFacade`, implementing `ISerializerFacade`.
     * This is only necessary once per major version and subsequent minor version projects can add a file link to these classes instead.
 
+## Exclusions
+
+For known test incompatibilities, exclusions can be defined to skip deserialization for specific test types from specific versions on the current project. Exclusions are specified by creating a custom class in a project deriving from `Excludes` (minor versions of the same major version might want to include the exclude list from the MajorVersion.0 project). The `FilesToExclude` contains a collection of test configurations to ignore. Each configuration to ignore is defined by the type (implementing `TestCase`) of the test and the name of the serialized test case file, e.g. `"NServiceBus4.6 .NET Framework 4.5.2.json"`.
+
 ## Build triggers
 
 The tests are triggered by:
