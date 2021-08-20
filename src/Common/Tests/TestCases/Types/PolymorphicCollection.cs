@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     [Serializable]
-    public class PolymorphicCollection
+    public class Polymorphic
     {
         public List<BaseEntity> Items { get; set; }
     }
