@@ -27,7 +27,7 @@ class JsonSerializerFacade : ISerializerFacade
 
     public object[] Deserialize(Stream stream)
     {
-        return serializer.Deserialize(stream, objectTypes);
+        return serializer.Deserialize(stream.ReadFully(), objectTypes);
     }
 
     public object CreateInstance(Type type)
