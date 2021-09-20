@@ -37,7 +37,7 @@ class XmlSerializerFacade : ISerializerFacade
 
     public object[] Deserialize(Stream stream)
     {
-        return serializer.Deserialize(stream);
+        return serializer.Deserialize(stream.ReadFully());
     }
 
     public object CreateInstance(Type type)
