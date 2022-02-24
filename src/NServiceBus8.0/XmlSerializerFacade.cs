@@ -20,7 +20,7 @@ class XmlSerializerFacade : ISerializerFacade
         settings.Set((MessageMetadataRegistry)Activator.CreateInstance
             (typeof(MessageMetadataRegistry),
             BindingFlags.NonPublic | BindingFlags.Instance, null,
-            new object[] { new Func<Type, bool>(conventions.IsMessageType) },
+            new object[] { new Func<Type, bool>(conventions.IsMessageType), true },
             null));
         settings.Set(conventions);
 
