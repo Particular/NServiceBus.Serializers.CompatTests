@@ -66,8 +66,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus7.5", "NServiceB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus7.6", "NServiceBus7.6\NServiceBus7.6.csproj", "{AEA5516C-251E-4EF6-A795-4B7C4EEAA05E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus7.7", "NServiceBus7.7\NServiceBus7.7.csproj", "{6980C615-CA50-4A33-B7E3-38880307A8D9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -186,10 +184,6 @@ Global
 		{AEA5516C-251E-4EF6-A795-4B7C4EEAA05E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEA5516C-251E-4EF6-A795-4B7C4EEAA05E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEA5516C-251E-4EF6-A795-4B7C4EEAA05E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6980C615-CA50-4A33-B7E3-38880307A8D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6980C615-CA50-4A33-B7E3-38880307A8D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6980C615-CA50-4A33-B7E3-38880307A8D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6980C615-CA50-4A33-B7E3-38880307A8D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
