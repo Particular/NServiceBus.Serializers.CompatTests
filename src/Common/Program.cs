@@ -105,7 +105,7 @@ class Program
                     var deserializedType = serializer.Deserialize(stream).First();
                     testCase.CheckIfAreEqual(deserializedType, expectedValues);
                 }
-                catch (Exception e) when (!(e is AssertionException))
+                catch (Exception e) when (e is not AssertionException)
                 {
                     Console.WriteLine("\tError: " + e.Message);
                     Assert.Fail($"Failed deserializing {testCase.GetType().Name} - {fileName}: {e}");
