@@ -43,6 +43,15 @@ To add a new version to test, follow these steps:
   * Add the classes `JsonSerializerFacade` and `XmlSerializerFacade`, implementing `ISerializerFacade`.
     * This is only necessary once per major version and subsequent minor version projects can add a file link to these classes instead.
 
+## Adding new serializers
+
+To add tests for a new serializer, follow these steps:
+
+* Create a facade class for the new serializer, implementing `ISerializerFacade`.
+* Define the class in the folder matching the serializer lowest supported version of NServiceBus. E.g., if the decision is to introduce a new serializer in NServiceBus 7.3, define the new facade in the `NServiceBus7.3` folder.
+* Add a link to the new serializer facade file to all subsequent NServiceBus supported versions
+* In Octopus, add a manual step to the serializer project to ensure the release to production process checks for compatibility tests results. For an example, look at the [NServiceBus release process steps](https://deploy.particular.net/app#/Spaces-1/projects/nservicebus/deployments/process/steps?actionId=9adbe00e-a81f-4346-8801-0eef1424a917).
+
 ## Exclusions
 
 For known test incompatibilities, exclusions can be defined to skip deserialization for specific test types from specific versions on the current project. Exclusions are specified by creating a custom class in a project deriving from `Excludes` (minor versions of the same major version might want to include the exclude list from the MajorVersion.0 project). The `FilesToExclude` contains a collection of test configurations to ignore. Each configuration to ignore is defined by the type (implementing `TestCase`) of the test and the name of the serialized test case file, e.g. `"NServiceBus4.6 .NET Framework 4.5.2.json"`.
