@@ -14,7 +14,7 @@
         [TestCaseSource(typeof(TestCaseGenerator), nameof(TestCaseGenerator.NServiceBusVersions))]
         public async Task Deserialize(TestDescription testDescription)
         {
-            var extension = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : ".dll";
+            var extension = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : "";
             var execPath = Path.Combine(testDescription.Directory, testDescription.Name + extension);
             var standardOutput = new StringBuilder();
             var errorOutput = new StringBuilder();
