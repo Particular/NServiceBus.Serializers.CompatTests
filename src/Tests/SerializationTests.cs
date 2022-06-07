@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading.Tasks;
     using CliWrap;
@@ -20,7 +21,8 @@
         [TestCaseSource(typeof(TestCaseGenerator), nameof(TestCaseGenerator.NServiceBusVersions))]
         public async Task Serialize(TestDescription testDescription)
         {
-            var execPath = Path.Combine(testDescription.Directory, testDescription.Name + ".exe");
+            var extension = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : ".dll";
+            var execPath = Path.Combine(testDescription.Directory, testDescription.Name + extension);
             var standardOutput = new StringBuilder();
             var errorOutput = new StringBuilder();
             try
