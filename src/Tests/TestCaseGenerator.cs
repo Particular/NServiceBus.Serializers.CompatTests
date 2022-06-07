@@ -17,10 +17,7 @@
 
         public static IEnumerable<TestDescription> NServiceBusVersions()
         {
-            var sep = Path.DirectorySeparatorChar;
-            var relativeDir = $"..{sep}..{sep}..{sep}..{sep}";
-            var projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativeDir));
-            var allDirectories = Directory.GetDirectories(projectDirectory);
+            var allDirectories = Directory.GetDirectories(Constants.ProjectDirectory);
             var regex = new Regex(@"NServiceBus\d+\.\d+");
 
             foreach (var directory in allDirectories)

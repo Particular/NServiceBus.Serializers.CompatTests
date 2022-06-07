@@ -28,7 +28,7 @@
             foreach (var latestVersion in latestVersions)
             {
                 var name = $"NServiceBus{latestVersion.Major}.{latestVersion.Minor}";
-                if (!Directory.Exists(Path.Combine(projectDirectory, name)))
+                if (!Directory.Exists(Path.Combine(Constants.ProjectDirectory, name)))
                 {
                     Assert.Fail($"No test project for {name} found.");
                 }
@@ -43,7 +43,7 @@
             var latestPrerelease = versions.Where(v => v.IsPrerelease).Max();
 
             var name = $"NServiceBus{latestPrerelease.Major}.{latestPrerelease.Minor}";
-            if (!Directory.Exists(Path.Combine(projectDirectory, name)))
+            if (!Directory.Exists(Path.Combine(Constants.ProjectDirectory, name)))
             {
                 Assert.Fail($"No test project for {name} found.");
             }
@@ -60,7 +60,6 @@
             return versions;
         }
 
-        readonly string projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
         static readonly SourceCacheContext Cache = new SourceCacheContext();
     }
 }
