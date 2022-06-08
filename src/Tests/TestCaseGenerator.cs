@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Text.RegularExpressions;
 
     public class TestCaseGenerator
@@ -16,8 +17,7 @@
 
         public static IEnumerable<TestDescription> NServiceBusVersions()
         {
-            var projectDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\..\"));
-            var allDirectories = Directory.GetDirectories(projectDirectory);
+            var allDirectories = Directory.GetDirectories(Constants.ProjectDirectory);
             var regex = new Regex(@"NServiceBus\d+\.\d+");
 
             foreach (var directory in allDirectories)
@@ -32,6 +32,10 @@
                     foreach (var platformPath in platforms)
                     {
                         var platformName = platformPath.Split(Path.DirectorySeparatorChar).Last();
+                        if (platformName.StartsWith("net4") && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                        {
+                            continue;
+                        }
                         yield return new TestDescription(versionName.Value, platformPath, platformName);
                     }
                 }
