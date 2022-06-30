@@ -15,7 +15,9 @@ class JsonSerializerFacade : ISerializerFacade
         mapper = new MessageMapper();
         mapper.Initialize(objectTypes);
         var settings = new SettingsHolder();
+#pragma warning disable CS0618 // Type or member is obsolete
         serializer = new NewtonsoftSerializer().Configure(settings)(mapper);
+#pragma warning restore CS0618 // Type or member is obsolete
     }
 
     public SerializationFormat SerializationFormat => SerializationFormat.Json;
