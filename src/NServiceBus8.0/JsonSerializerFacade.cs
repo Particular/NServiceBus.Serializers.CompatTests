@@ -15,7 +15,7 @@ class JsonSerializerFacade : ISerializerFacade
         mapper = new MessageMapper();
         mapper.Initialize(objectTypes);
         var settings = new SettingsHolder();
-        serializer = new NewtonsoftSerializer().Configure(settings)(mapper);
+        serializer = new NewtonsoftJsonSerializer().Configure(settings)(mapper);
     }
 
     public SerializationFormat SerializationFormat => SerializationFormat.Json;
