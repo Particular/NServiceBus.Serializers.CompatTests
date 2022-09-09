@@ -27,13 +27,13 @@
             expected.Data2 = "Lorem ipsum";
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (GenericMessage<int, string>)instanceA;
-            var result = (GenericMessage<int, string>)instanceB;
+            var expected = (GenericMessage<int, string>)expectedObj;
+            var actual = (GenericMessage<int, string>)actualObj;
 
-            Assert.AreEqual(expected.Data1, result.Data1);
-            Assert.AreEqual(expected.Data2, result.Data2);
+            Assert.AreEqual(expected.Data1, actual.Data1, "Generic Data1");
+            Assert.AreEqual(expected.Data2, actual.Data2, "Generic Data2");
         }
     }
 }

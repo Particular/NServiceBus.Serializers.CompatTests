@@ -22,13 +22,13 @@
         }
 
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (TestMessageWithChar)instanceA;
-            var message = (TestMessageWithChar)instanceB;
+            var expected = (TestMessageWithChar)expectedObj;
+            var actual = (TestMessageWithChar)actualObj;
 
-            Assert.AreEqual(expected.ValidCharacter, message.ValidCharacter);
-            Assert.AreEqual(expected.InvalidCharacter, message.InvalidCharacter);
+            Assert.AreEqual(expected.ValidCharacter, actual.ValidCharacter, "Valid characters do not match.");
+            Assert.AreEqual(expected.InvalidCharacter, actual.InvalidCharacter, "Invalid characters do not match.");
         }
     }
 }

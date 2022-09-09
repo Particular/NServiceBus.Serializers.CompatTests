@@ -52,21 +52,21 @@
             expected.DateTimeOffsetUtc = expectedDateTimeOffsetUtc;
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (Dates)instanceA;
-            var other = (Dates)instanceB;
+            var expected = (Dates)expectedObj;
+            var actual = (Dates)actualObj;
 
-            Assert.AreEqual(expected.DateTime, other.DateTime);
-            Assert.AreEqual(expected.DateTimeUtc, other.DateTimeUtc);
-            Assert.AreEqual(expected.DateTimeLocal, other.DateTimeLocal);
+            Assert.AreEqual(expected.DateTime, actual.DateTime);
+            Assert.AreEqual(expected.DateTimeUtc, actual.DateTimeUtc);
+            Assert.AreEqual(expected.DateTimeLocal, actual.DateTimeLocal);
 
-            Assert.AreEqual(expected.DateTimeOffset, other.DateTimeOffset);
-            Assert.AreEqual(expected.DateTimeOffset.Offset, other.DateTimeOffset.Offset);
-            Assert.AreEqual(expected.DateTimeOffsetLocal, other.DateTimeOffsetLocal);
-            Assert.AreEqual(expected.DateTimeOffsetLocal.Offset, other.DateTimeOffsetLocal.Offset);
-            Assert.AreEqual(expected.DateTimeOffsetUtc, other.DateTimeOffsetUtc);
-            Assert.AreEqual(expected.DateTimeOffsetUtc.Offset, other.DateTimeOffsetUtc.Offset);
+            Assert.AreEqual(expected.DateTimeOffset, actual.DateTimeOffset);
+            Assert.AreEqual(expected.DateTimeOffset.Offset, actual.DateTimeOffset.Offset);
+            Assert.AreEqual(expected.DateTimeOffsetLocal, actual.DateTimeOffsetLocal);
+            Assert.AreEqual(expected.DateTimeOffsetLocal.Offset, actual.DateTimeOffsetLocal.Offset);
+            Assert.AreEqual(expected.DateTimeOffsetUtc, actual.DateTimeOffsetUtc);
+            Assert.AreEqual(expected.DateTimeOffsetUtc.Offset, actual.DateTimeOffsetUtc.Offset);
         }
 
         static DateTime expectedDateTime = new DateTime(2010, 10, 13, 12, 32, 42, DateTimeKind.Unspecified);

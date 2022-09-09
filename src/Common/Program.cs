@@ -103,7 +103,7 @@ class Program
                 {
                     Console.WriteLine($"\tDeserializing {fileName}");
                     var deserializedType = serializer.Deserialize(stream).First();
-                    testCase.CheckIfAreEqual(deserializedType, expectedValues);
+                    testCase.CheckIfAreEqual(expectedValues, deserializedType);
                 }
                 catch (Exception e) when (e is not AssertionException)
                 {
