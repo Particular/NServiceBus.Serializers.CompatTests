@@ -31,12 +31,12 @@
             };
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object currentObject, object expectedObject)
         {
-            var expected = (Polymorphic)instanceA;
-            var pc = (Polymorphic)instanceB;
+            var expected = (Polymorphic)expectedObject;
+            var actual = (Polymorphic)currentObject;
 
-            CollectionAssert.AreEqual(expected.Items, pc.Items);
+            CollectionAssert.AreEqual(expected.Items, actual.Items);
         }
     }
 }

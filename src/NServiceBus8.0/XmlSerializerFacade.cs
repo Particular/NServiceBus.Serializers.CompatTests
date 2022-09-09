@@ -16,10 +16,11 @@ class XmlSerializerFacade : ISerializerFacade
         mapper = new MessageMapper();
         var settings = new SettingsHolder();
         var conventions = CreateTestConventions(settings);
+
         // evil hack
         settings.Set((MessageMetadataRegistry)Activator.CreateInstance
-            (typeof(MessageMetadataRegistry),
-            BindingFlags.NonPublic | BindingFlags.Instance, null,
+        (typeof(MessageMetadataRegistry),
+            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null,
             new object[] { new Func<Type, bool>(conventions.IsMessageType), true },
             null));
         settings.Set(conventions);
