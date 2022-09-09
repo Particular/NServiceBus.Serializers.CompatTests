@@ -22,9 +22,11 @@
 
         public override bool Equals(object obj)
         {
-            var other = obj as SpecializationA;
-
-            return other != null && Name == other.Name;
+            if (obj is SpecializationA other)
+            {
+                return Name == other.Name;
+            }
+            return false;
         }
 
         public override int GetHashCode()
@@ -40,9 +42,11 @@
 
         public override bool Equals(object obj)
         {
-            var other = (SpecializationB)obj;
-
-            return other != null && Name == other.Name;
+            if (obj is SpecializationB other)
+            {
+                return Name == other.Name;
+            }
+            return false;
         }
 
         public override int GetHashCode()
