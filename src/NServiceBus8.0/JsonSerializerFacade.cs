@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Common;
 using Common.Tests;
+using Newtonsoft.Json;
 using NServiceBus;
 using NServiceBus.MessageInterfaces.MessageMapper.Reflection;
 using NServiceBus.Serialization;
@@ -15,7 +16,11 @@ class JsonSerializerFacade : ISerializerFacade
         mapper = new MessageMapper();
         mapper.Initialize(objectTypes);
         var settings = new SettingsHolder();
-        serializer = new NewtonsoftJsonSerializer().Configure(settings)(mapper);
+
+        var jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto };
+        settings.Set("NServiceBus.Newtonsoft.Json.Settings", jsonSettings);
+        var ser = new NewtonsoftJsonSerializer();
+        serializer = ser.Configure(settings)(mapper);
     }
 
     public SerializationFormat SerializationFormat => SerializationFormat.Json;
