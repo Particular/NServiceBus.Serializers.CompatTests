@@ -15,12 +15,12 @@
             expected.Value = "Test Value";
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (ISampleEvent)instanceA;
-            var other = (ISampleEvent)instanceB;
+            var expected = (ISampleEvent)expectedObj;
+            var actual = (ISampleEvent)actualObj;
 
-            Assert.AreEqual(expected.Value, other.Value);
+            Assert.AreEqual(expected.Value, actual.Value);
         }
     }
 }

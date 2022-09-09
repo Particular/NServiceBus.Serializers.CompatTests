@@ -10,6 +10,6 @@
 
         public abstract void Populate(object instance);
 
-        public abstract void CheckIfAreEqual(object instanceA, object instanceB);
+        public abstract void CheckIfAreEqual(object expectedObj, object actualObj);
     }
 }

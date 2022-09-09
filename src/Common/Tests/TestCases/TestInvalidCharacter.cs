@@ -26,12 +26,12 @@
             expected.Special = sb.ToString();
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (MessageWithInvalidCharacter)instanceA;
-            var result = (MessageWithInvalidCharacter)instanceB;
+            var expected = (MessageWithInvalidCharacter)expectedObj;
+            var actual = (MessageWithInvalidCharacter)actualObj;
 
-            Assert.AreEqual(expected.Special, result.Special);
+            Assert.AreEqual(expected.Special, actual.Special);
         }
     }
 }

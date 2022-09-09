@@ -16,13 +16,13 @@
             expected.LastName = "Smith";
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (Person)instanceA;
-            var other = (Person)instanceB;
+            var expected = (Person)expectedObj;
+            var actual = (Person)actualObj;
 
-            Assert.AreEqual(expected.FirstName, other.FirstName);
-            Assert.AreEqual(expected.LastName, other.LastName);
+            Assert.AreEqual(expected.FirstName, actual.FirstName, "FirstName does not match");
+            Assert.AreEqual(expected.LastName, actual.LastName, "LastName does not match");
         }
     }
 }

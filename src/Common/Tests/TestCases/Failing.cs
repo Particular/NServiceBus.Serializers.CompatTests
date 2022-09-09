@@ -16,7 +16,7 @@
         {
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
             Assert.AreEqual("0", "1");
         }
