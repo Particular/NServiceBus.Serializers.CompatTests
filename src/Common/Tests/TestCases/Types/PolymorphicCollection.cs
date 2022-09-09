@@ -22,7 +22,7 @@
 
         public override bool Equals(object obj)
         {
-            var other = (SpecializationA)obj;
+            var other = obj as SpecializationA;
 
             return other != null && Name == other.Name;
         }
