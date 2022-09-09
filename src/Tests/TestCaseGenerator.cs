@@ -18,13 +18,15 @@
         public static IEnumerable<TestDescription> NServiceBusVersions()
         {
             var allDirectories = Directory.GetDirectories(Constants.ProjectDirectory);
-            var regex = new Regex(@"NServiceBus\d+\.\d+");
+            var regex = new Regex(@"NServiceBus(?<major>\d+)\.\d+");
 
             foreach (var directory in allDirectories)
             {
                 var match = regex.Match(directory);
                 if (match.Success)
                 {
+                    var major = int.Parse(match.Groups["major"].Value);
+
                     var versionName = match.Groups[0];
 
                     var platforms = Directory.GetDirectories(Path.Combine(directory, "bin", ConfigurationFolder));
@@ -32,6 +34,10 @@
                     foreach (var platformPath in platforms)
                     {
                         var platformName = platformPath.Split(Path.DirectorySeparatorChar).Last();
+                        if (major >= 8 && platformName.StartsWith("netcoreapp"))
+                        {
+                            continue; // NServiceBus 8 no longer targets netcore 3.1
+                        }
                         if (platformName.StartsWith("net4") && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                         {
                             continue;
