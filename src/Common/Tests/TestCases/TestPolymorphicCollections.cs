@@ -31,12 +31,12 @@
             };
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (Polymorphic)instanceA;
-            var pc = (Polymorphic)instanceB;
+            var expected = (Polymorphic)actualObj;
+            var actual = (Polymorphic)expectedObj;
 
-            CollectionAssert.AreEqual(expected.Items, pc.Items);
+            CollectionAssert.AreEqual(expected.Items, actual.Items, "Polymorphic object graph does not match.");
         }
     }
 }

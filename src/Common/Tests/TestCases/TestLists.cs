@@ -141,26 +141,26 @@
             };
         }
 
-        public override void CheckIfAreEqual(object instanceA, object instanceB)
+        public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (MessageWithLists)instanceA;
-            var result = (MessageWithLists)instanceB;
+            var expected = (MessageWithLists)expectedObj;
+            var actual = (MessageWithLists)actualObj;
 
-            CollectionAssert.AreEqual(expected.Bools, result.Bools);
-            CollectionAssert.AreEqual(expected.Chars, result.Chars);
-            CollectionAssert.AreEqual(expected.Bytes, result.Bytes);
-            CollectionAssert.AreEqual(expected.Ints, result.Ints);
-            CollectionAssert.AreEqual(expected.Decimals, result.Decimals);
-            CollectionAssert.AreEqual(expected.Doubles, result.Doubles);
-            CollectionAssert.AreEqual(expected.Floats, result.Floats);
-            CollectionAssert.AreEqual(expected.Enums, result.Enums);
-            CollectionAssert.AreEqual(expected.Longs, result.Longs);
-            CollectionAssert.AreEqual(expected.SBytes, result.SBytes);
-            CollectionAssert.AreEqual(expected.Shorts, result.Shorts);
-            CollectionAssert.AreEqual(expected.Strings, result.Strings);
-            CollectionAssert.AreEqual(expected.UInts, result.UInts);
-            CollectionAssert.AreEqual(expected.ULongs, result.ULongs);
-            CollectionAssert.AreEqual(expected.UShorts, result.UShorts);
+            CollectionAssert.AreEqual(expected.Bools, actual.Bools, "Bools collection does not match");
+            CollectionAssert.AreEqual(expected.Chars, actual.Chars, "Chars collection does not match");
+            CollectionAssert.AreEqual(expected.Bytes, actual.Bytes, " Bytes collection does not match");
+            CollectionAssert.AreEqual(expected.Ints, actual.Ints, "Ints collection does not match");
+            CollectionAssert.AreEqual(expected.Decimals, actual.Decimals, "Decimals collection does not match");
+            CollectionAssert.AreEqual(expected.Doubles, actual.Doubles, "Doubles collection does not match");
+            CollectionAssert.AreEqual(expected.Floats, actual.Floats, "Floats collection does not match");
+            CollectionAssert.AreEqual(expected.Enums, actual.Enums, "Enums collection does not match");
+            CollectionAssert.AreEqual(expected.Longs, actual.Longs, "Longs collection does not match");
+            CollectionAssert.AreEqual(expected.SBytes, actual.SBytes, "SBytes collection does not match");
+            CollectionAssert.AreEqual(expected.Shorts, actual.Shorts, "Shorts collection does not match");
+            CollectionAssert.AreEqual(expected.Strings, actual.Strings, "String collection does not match");
+            CollectionAssert.AreEqual(expected.UInts, actual.UInts, "UInts collection does not match");
+            CollectionAssert.AreEqual(expected.ULongs, actual.ULongs, "ULongs collection does not match");
+            CollectionAssert.AreEqual(expected.UShorts, actual.UShorts, "UShorts collection does not match");
         }
     }
 }
