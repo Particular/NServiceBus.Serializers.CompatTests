@@ -35,4 +35,4 @@ jobs:
       - name: Build
         run: dotnet build src --configuration Release
       - name: Run tests
-        uses: Particular/run-tests-action@v1.4.0
+        uses: Particular/run-tests-action@v1.5.0
