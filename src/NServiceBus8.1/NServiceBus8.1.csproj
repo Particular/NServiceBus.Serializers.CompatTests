@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net472;net6.0;net7.0</TargetFrameworks>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NServiceBus" Version="8.1.*" />
+    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Common\Program.cs" Link="Program.cs" />
+    <Compile Include="..\NServiceBus8.0\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
+    <Compile Include="..\NServiceBus8.0\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
+    <Compile Include="..\NServiceBus8.0\ExcludeList.cs" Link="ExcludeList.cs" />
+    <Compile Include="..\NServiceBus8.0\StreamExtensions.cs" Link="StreamExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+</Project>
