@@ -60,7 +60,7 @@ For known test incompatibilities, exclusions can be defined to skip deserializat
 
 The tests are triggered by:
 * A weekly schedule
-* Whenever a new (latest) package of `NServiceBus` or `NServiceBus.Newtonsoft.Json` has been pushed to the company's myget feed.
+* Whenever a new (latest) package of `NServiceBus` or `NServiceBus.Newtonsoft.Json` has been pushed to the company's feedz.io feed.
 
 ## Dependencies
 

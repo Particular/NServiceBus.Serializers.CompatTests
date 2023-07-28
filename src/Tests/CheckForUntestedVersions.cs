@@ -51,7 +51,7 @@
 
         static async Task<NuGetVersion[]> GetAllNServiceBusVersions()
         {
-            var repository = Repository.Factory.GetCoreV3("https://www.myget.org/F/particular/api/v3/index.json");
+            var repository = Repository.Factory.GetCoreV3("https://f.feedz.io/particular-software/packages/nuget/index.json");
             var result = await repository.GetResourceAsync<FindPackageByIdResource>()
                 .ConfigureAwait(false);
             var versions = (await result.GetAllVersionsAsync("NServiceBus", Cache, NullLogger.Instance, CancellationToken.None)
