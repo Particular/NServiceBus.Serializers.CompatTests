@@ -1,6 +1,5 @@
 ﻿namespace Common
 {
-    using System;
     using System.IO;
     using Tests;
 
@@ -9,6 +8,5 @@
         SerializationFormat SerializationFormat { get; }
         void Serialize(Stream stream, object instance);
         object[] Deserialize(Stream stream);
-        object CreateInstance(Type type);
     }
 }

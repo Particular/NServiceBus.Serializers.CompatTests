@@ -8,13 +8,11 @@
     {
         public override Type MessageType => typeof(Person);
 
-        public override void Populate(object instance)
+        public override object CreateInstance() => new Person
         {
-            var expected = (Person)instance;
-
-            expected.FirstName = "John";
-            expected.LastName = "Smith";
-        }
+            FirstName = "John",
+            LastName = "Smith"
+        };
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {

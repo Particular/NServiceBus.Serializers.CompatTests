@@ -12,9 +12,7 @@
         //      only Common.dll is. It should never run with other serialization test cases.
         public override bool IsSupported(SerializationFormat format, PackageVersion version) => false;
 
-        public override void Populate(object instance)
-        {
-        }
+        public override object CreateInstance() => null;
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {

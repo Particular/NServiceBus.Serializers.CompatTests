@@ -8,12 +8,7 @@
     {
         public override Type MessageType => typeof(ISampleEvent);
 
-        public override void Populate(object instance)
-        {
-            var expected = (ISampleEvent)instance;
-
-            expected.Value = "Test Value";
-        }
+        public override object CreateInstance() => new SampleEventImpl { Value = "TestValue" };
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
@@ -21,6 +16,11 @@
             var actual = (ISampleEvent)actualObj;
 
             Assert.AreEqual(expected.Value, actual.Value);
+        }
+
+        class SampleEventImpl : ISampleEvent
+        {
+            public string Value { get; set; }
         }
     }
 }

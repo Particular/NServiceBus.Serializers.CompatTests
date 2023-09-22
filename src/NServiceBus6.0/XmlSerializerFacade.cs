@@ -37,11 +37,6 @@ class XmlSerializerFacade : ISerializerFacade
         return serializer.Deserialize(stream);
     }
 
-    public object CreateInstance(Type type)
-    {
-        return type.IsInterface ? mapper.CreateInstance(type) : Activator.CreateInstance(type);
-    }
-
     object CreateTestConventions(SettingsHolder settings)
     {
         var builder = new ConventionsBuilder(settings);

@@ -8,7 +8,7 @@
 
         public virtual bool IsSupported(SerializationFormat format, PackageVersion version) => true;
 
-        public abstract void Populate(object instance);
+        public abstract object CreateInstance();
 
         public abstract void CheckIfAreEqual(object expectedObj, object actualObj);
     }

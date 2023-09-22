@@ -13,14 +13,12 @@
             return version.Major != 3;
         }
 
-        public override void Populate(object instance)
-        {
-            var expected = (TestMessageWithChar)instance;
-
-            expected.ValidCharacter = 'a';
-            expected.InvalidCharacter = '<';
-        }
-
+        public override object CreateInstance() =>
+            new TestMessageWithChar
+            {
+                ValidCharacter = 'a',
+                InvalidCharacter = '<'
+            };
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {

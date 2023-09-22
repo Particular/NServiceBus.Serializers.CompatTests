@@ -9,14 +9,11 @@
     {
         public override Type MessageType => typeof(MessageWithInvalidCharacter);
 
-        public override bool IsSupported(SerializationFormat format, PackageVersion version)
-        {
-            return version.Major != 3;
-        }
+        public override bool IsSupported(SerializationFormat format, PackageVersion version) => version.Major != 3;
 
-        public override void Populate(object instance)
+        public override object CreateInstance()
         {
-            var expected = (MessageWithInvalidCharacter)instance;
+            var expected = new MessageWithInvalidCharacter();
 
             var sb = new StringBuilder();
             sb.Append("Hello");
@@ -24,6 +21,8 @@
             sb.Append("John");
 
             expected.Special = sb.ToString();
+
+            return expected;
         }
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)

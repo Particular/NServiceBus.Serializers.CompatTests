@@ -77,8 +77,7 @@ class Program
 
     static void DeserializeAndVerify(ISerializerFacade serializer, TestCase testCase)
     {
-        var expectedValues = serializer.CreateInstance(testCase.MessageType);
-        testCase.Populate(expectedValues);
+        var expectedValues = testCase.CreateInstance();
 
         var testCaseFolder = GetTestCaseFolder(testCase, serializer.SerializationFormat);
         var files = Directory.GetFiles(testCaseFolder);
@@ -128,8 +127,7 @@ class Program
 
     static void Serialize(ISerializerFacade serializer, TestCase testCase)
     {
-        var testInstance = serializer.CreateInstance(testCase.MessageType);
-        testCase.Populate(testInstance);
+        var testInstance = testCase.CreateInstance();
 
         var testCaseFolder = GetTestCaseFolder(testCase, serializer.SerializationFormat);
 

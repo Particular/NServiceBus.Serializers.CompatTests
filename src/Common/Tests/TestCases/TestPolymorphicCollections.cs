@@ -14,22 +14,21 @@
             return format == SerializationFormat.Json;
         }
 
-        public override void Populate(object instance)
-        {
-            var expected = (Polymorphic)instance;
-
-            expected.Items = new List<BaseEntity>
+        public override object CreateInstance() =>
+            new Polymorphic
             {
-                new SpecializationA
+                Items = new List<BaseEntity>
                 {
-                    Name = "A"
-                },
-                new SpecializationB
-                {
-                    Name = "B"
+                    new SpecializationA
+                    {
+                        Name = "A"
+                    },
+                    new SpecializationB
+                    {
+                        Name = "B"
+                    }
                 }
             };
-        }
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {

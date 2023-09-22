@@ -32,11 +32,6 @@ class JsonSerializerFacade : ISerializerFacade
         return serializer.Deserialize(stream, objectTypes);
     }
 
-    public object CreateInstance(Type type)
-    {
-        return type.IsInterface ? mapper.CreateInstance(type) : Activator.CreateInstance(type);
-    }
-
     MessageMapper mapper;
     IMessageSerializer serializer;
     Type[] objectTypes;
