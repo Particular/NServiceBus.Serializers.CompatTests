@@ -10,7 +10,7 @@
     {
         public override Type MessageType => typeof(MessageWithLists);
 
-        public override object CreateInstance()
+        public override object CreateInstance(ISerializerFacade serializer)
         {
             var expected = new MessageWithLists
             {

@@ -40,7 +40,7 @@
 
         public override Type MessageType => typeof(Dates);
 
-        public override object CreateInstance() => new Dates
+        public override object CreateInstance(ISerializerFacade serializer) => new Dates
         {
             DateTime = expectedDateTime,
             DateTimeUtc = expectedDateTimeUtc,

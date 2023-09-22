@@ -15,7 +15,7 @@
             return version.Major > 3 || (version.Major == 3 && version.Minor == 3);
         }
 
-        public override object CreateInstance()
+        public override object CreateInstance(ISerializerFacade serializer)
         {
             var dictionary = new MessageWithDictionaries
             {

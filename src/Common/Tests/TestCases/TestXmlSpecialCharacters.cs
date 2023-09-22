@@ -13,7 +13,7 @@
             return version.Major != 3;
         }
 
-        public override object CreateInstance() =>
+        public override object CreateInstance(ISerializerFacade serializer) =>
             new TestMessageWithChar
             {
                 ValidCharacter = 'a',

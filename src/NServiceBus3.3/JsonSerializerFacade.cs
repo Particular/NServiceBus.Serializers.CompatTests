@@ -35,6 +35,11 @@ class JsonSerializerFacade : ISerializerFacade
         return serializer.Deserialize(stream);
     }
 
+    public object CreateInstance(Type type)
+    {
+        return type.IsInterface ? mapper.CreateInstance(type) : Activator.CreateInstance(type);
+    }
+
     void SetupTypeHeader(Type[] objectTypes)
     {
         Debug.WriteLine("xxx");

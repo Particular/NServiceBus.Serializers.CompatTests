@@ -41,6 +41,11 @@ class XmlSerializerFacade : ISerializerFacade
         return serializer.Deserialize(stream.ReadFully());
     }
 
+    public object CreateInstance(Type type)
+    {
+        return type.IsInterface ? mapper.CreateInstance(type) : Activator.CreateInstance(type);
+    }
+
     Conventions CreateTestConventions(SettingsHolder settings)
     {
         var builder = new ConventionsBuilder(settings);

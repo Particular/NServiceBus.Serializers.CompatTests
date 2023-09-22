@@ -8,7 +8,12 @@
     {
         public override Type MessageType => typeof(ISampleEvent);
 
-        public override object CreateInstance() => new SampleEventImpl { Value = "TestValue" };
+        public override object CreateInstance(ISerializerFacade serializer)
+        {
+            var impl = (ISampleEvent)serializer.CreateInstance(typeof(ISampleEvent));
+            impl.Value = "TestValue";
+            return impl;
+        }
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
@@ -16,11 +21,6 @@
             var actual = (ISampleEvent)actualObj;
 
             Assert.AreEqual(expected.Value, actual.Value);
-        }
-
-        class SampleEventImpl : ISampleEvent
-        {
-            public string Value { get; set; }
         }
     }
 }

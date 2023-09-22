@@ -18,7 +18,7 @@
             return base.IsSupported(format, version);
         }
 
-        public override object CreateInstance() =>
+        public override object CreateInstance(ISerializerFacade serializer) =>
             new GenericMessage<int, string>
             {
                 SagaId = Guid.NewGuid(),

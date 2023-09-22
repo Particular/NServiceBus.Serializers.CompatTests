@@ -30,6 +30,11 @@ class XmlSerializerFacade : ISerializerFacade
         return serializer.Deserialize(stream);
     }
 
+    public object CreateInstance(Type type)
+    {
+        return type.IsInterface ? mapper.CreateInstance(type) : Activator.CreateInstance(type);
+    }
+
     readonly XmlMessageSerializer serializer;
     readonly MessageMapper mapper;
 }

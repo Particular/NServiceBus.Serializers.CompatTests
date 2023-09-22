@@ -11,7 +11,7 @@
 
         public override bool IsSupported(SerializationFormat format, PackageVersion version) => version.Major != 3;
 
-        public override object CreateInstance()
+        public override object CreateInstance(ISerializerFacade serializer)
         {
             var expected = new MessageWithInvalidCharacter();
 

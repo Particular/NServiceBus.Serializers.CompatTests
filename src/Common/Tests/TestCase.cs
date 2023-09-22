@@ -8,7 +8,7 @@
 
         public virtual bool IsSupported(SerializationFormat format, PackageVersion version) => true;
 
-        public abstract object CreateInstance();
+        public abstract object CreateInstance(ISerializerFacade serializer);
 
         public abstract void CheckIfAreEqual(object expectedObj, object actualObj);
     }
