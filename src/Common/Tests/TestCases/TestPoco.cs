@@ -8,7 +8,7 @@
     {
         public override Type MessageType => typeof(Person);
 
-        public override object CreateInstance(ISerializerFacade serializer) => new Person
+        public override object CreateInstance() => new Person
         {
             FirstName = "John",
             LastName = "Smith"

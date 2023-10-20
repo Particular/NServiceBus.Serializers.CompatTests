@@ -14,7 +14,7 @@
             return format == SerializationFormat.Json;
         }
 
-        public override object CreateInstance(ISerializerFacade serializer) =>
+        public override object CreateInstance() =>
             new Polymorphic
             {
                 Items = new List<BaseEntity>
