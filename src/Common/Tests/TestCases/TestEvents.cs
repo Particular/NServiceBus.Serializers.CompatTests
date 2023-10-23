@@ -8,12 +8,15 @@
     {
         public override Type MessageType => typeof(ISampleEvent);
 
-        public override void Populate(object instance)
+        public override object CreateInstance(ISerializerFacade serializer)
         {
-            var expected = (ISampleEvent)instance;
-
-            expected.Value = "Test Value";
+            // This test requires the message mapper to create instances of the message type as old serializers can't handle arbitrary types implementing the interface.
+            var impl = (ISampleEvent)serializer.CreateInstance(typeof(ISampleEvent));
+            impl.Value = "TestValue";
+            return impl;
         }
+
+        public override object CreateInstance() => throw new NotImplementedException();
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {

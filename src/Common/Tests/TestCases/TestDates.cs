@@ -40,17 +40,15 @@
 
         public override Type MessageType => typeof(Dates);
 
-        public override void Populate(object instance)
+        public override object CreateInstance() => new Dates
         {
-            var expected = (Dates)instance;
-
-            expected.DateTime = expectedDateTime;
-            expected.DateTimeUtc = expectedDateTimeUtc;
-            expected.DateTimeLocal = expectedDateTimeLocal;
-            expected.DateTimeOffset = expectedDateTimeOffset;
-            expected.DateTimeOffsetLocal = expectedDateTimeOffsetLocal;
-            expected.DateTimeOffsetUtc = expectedDateTimeOffsetUtc;
-        }
+            DateTime = expectedDateTime,
+            DateTimeUtc = expectedDateTimeUtc,
+            DateTimeLocal = expectedDateTimeLocal,
+            DateTimeOffset = expectedDateTimeOffset,
+            DateTimeOffsetLocal = expectedDateTimeOffsetLocal,
+            DateTimeOffsetUtc = expectedDateTimeOffsetUtc
+        };
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {

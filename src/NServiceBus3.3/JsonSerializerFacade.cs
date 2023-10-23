@@ -42,7 +42,6 @@ class JsonSerializerFacade : ISerializerFacade
 
     void SetupTypeHeader(Type[] objectTypes)
     {
-        Debug.WriteLine("xxx");
         AppDomain.CurrentDomain.GetAssemblies().Where(a => a.IsDynamic == false).ToList().ForEach(a => Debug.WriteLine(a.CodeBase));
 
         Configure.With();

@@ -18,14 +18,13 @@
             return base.IsSupported(format, version);
         }
 
-        public override void Populate(object instance)
-        {
-            var expected = (GenericMessage<int, string>)instance;
-
-            expected.SagaId = Guid.NewGuid();
-            expected.Data1 = 1234;
-            expected.Data2 = "Lorem ipsum";
-        }
+        public override object CreateInstance() =>
+            new GenericMessage<int, string>
+            {
+                SagaId = Guid.NewGuid(),
+                Data1 = 1234,
+                Data2 = "Lorem ipsum"
+            };
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
