@@ -1,7 +1,6 @@
 ﻿namespace Common.Tests.TestCases
 {
     using System;
-    using System.Collections.Generic;
     using NUnit.Framework;
     using Types;
 
@@ -17,8 +16,8 @@
         public override object CreateInstance() =>
             new Polymorphic
             {
-                Items = new List<BaseEntity>
-                {
+                Items =
+                [
                     new SpecializationA
                     {
                         Name = "A"
@@ -27,7 +26,7 @@
                     {
                         Name = "B"
                     }
-                }
+                ]
             };
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)

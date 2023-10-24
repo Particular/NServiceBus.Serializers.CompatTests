@@ -1,7 +1,6 @@
 ﻿namespace Common.Tests.TestCases
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using NUnit.Framework;
     using Types;
@@ -14,31 +13,31 @@
         {
             var expected = new MessageWithLists
             {
-                Bools = new List<bool>
-                {
+                Bools =
+                [
                     true,
                     false
-                },
-                Chars = new List<char>
-                {
+                ],
+                Chars =
+                [
                     'a',
                     'b',
                     'c',
                     'd',
                     'e',
                     'f'
-                },
-                Bytes = new List<byte>
-                {
+                ],
+                Bytes =
+                [
                     byte.MinValue,
                     byte.MaxValue,
                     11,
                     1,
                     1,
                     0
-                },
-                Ints = new List<int>
-                {
+                ],
+                Ints =
+                [
                     int.MinValue,
                     int.MaxValue,
                     1,
@@ -47,94 +46,94 @@
                     4,
                     5,
                     6
-                },
-                Decimals = new List<decimal>
-                {
+                ],
+                Decimals =
+                [
                     decimal.MinValue,
                     decimal.MaxValue,
                     .2m,
                     4m,
                     .5m,
                     .4234m
-                },
-                Doubles = new List<double>
-                {
+                ],
+                Doubles =
+                [
                     double.MinValue,
                     double.MaxValue,
                     .223d,
                     234d,
                     .513d,
                     .4212334d
-                },
-                Floats = new List<float>
-                {
+                ],
+                Floats =
+                [
                     float.MinValue,
                     float.MaxValue,
                     .223f,
                     234f,
                     .513f,
                     .4212334f
-                },
-                Enums = new List<DateTimeStyles>
-                {
+                ],
+                Enums =
+                [
                     DateTimeStyles.AdjustToUniversal,
                     DateTimeStyles.AllowLeadingWhite,
                     DateTimeStyles.AllowTrailingWhite
-                },
-                Longs = new List<long>
-                {
+                ],
+                Longs =
+                [
                     long.MaxValue,
                     long.MinValue,
                     34234,
                     234324,
                     45345345,
                     34534534565
-                },
-                SBytes = new List<sbyte>
-                {
+                ],
+                SBytes =
+                [
                     sbyte.MaxValue,
                     sbyte.MaxValue,
                     56,
                     13
-                },
-                Shorts = new List<short>
-                {
+                ],
+                Shorts =
+                [
                     short.MinValue,
                     short.MaxValue,
                     5231,
                     6123
-                },
-                Strings = new List<string>
-                {
+                ],
+                Strings =
+                [
                     "Key1",
                     "Value1",
                     "Key2",
                     "Value2",
                     "Key3",
                     "Value3"
-                },
-                UInts = new List<uint>
-                {
+                ],
+                UInts =
+                [
                     uint.MinValue,
                     23,
                     uint.MaxValue,
                     34324
-                },
-                ULongs = new List<ulong>
-                {
+                ],
+                ULongs =
+                [
                     //HINT: max ulong values are not supported by JSON format
                     //ulong.MinValue,
                     //ulong.MaxValue,
                     34324234,
                     3243243245
-                },
-                UShorts = new List<ushort>
-                {
+                ],
+                UShorts =
+                [
                     ushort.MinValue,
                     ushort.MaxValue,
                     42324,
                     32
-                }
+                ]
             };
 
             return expected;
