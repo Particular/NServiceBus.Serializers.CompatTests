@@ -1,23 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net472</TargetFramework>
+    <OutputType>Exe</OutputType>
     <RootNamespace>NServiceBus5._2</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NServiceBus" Version="5.2.*" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Common\Program.cs" Link="Program.cs" />
-    <Compile Include="..\NServiceBus5.0\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
-    <Compile Include="..\NServiceBus5.0\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <Compile Include="..\Common\Program.cs" />
+    <Compile Include="..\NServiceBus5.0\*.cs" />
   </ItemGroup>
 
 </Project>

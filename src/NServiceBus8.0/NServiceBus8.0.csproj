@@ -1,9 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFrameworks>net472;net6.0;net7.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NServiceBus8._0</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NServiceBus" Version="8.0.*" />
@@ -11,11 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Common\Program.cs" Link="Program.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <Compile Include="..\Common\Program.cs" />
   </ItemGroup>
 
 </Project>
