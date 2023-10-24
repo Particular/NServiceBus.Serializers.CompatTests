@@ -1,23 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net452</TargetFramework>
-		<RootNamespace>NServiceBus4._7</RootNamespace>
-	</PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>NServiceBus4._7</RootNamespace>
+  </PropertyGroup>
 
-	<ItemGroup>		
-		<PackageReference Include="NServiceBus" Version="4.7.*" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NServiceBus" Version="4.7.*" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Compile Include="..\Common\Program.cs" Link="Program.cs" />	
-		<Compile Include="..\NServiceBus4.0\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
-		<Compile Include="..\NServiceBus4.0\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\Program.cs" Link="Program.cs" />
+    <Compile Include="..\NServiceBus4.0\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
+    <Compile Include="..\NServiceBus4.0\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\Common\Common.csproj" />
-	</ItemGroup>	
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
 
 </Project>
