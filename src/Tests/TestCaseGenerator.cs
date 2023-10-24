@@ -33,10 +33,6 @@
                     foreach (var platformPath in platforms)
                     {
                         var platformName = platformPath.Split(Path.DirectorySeparatorChar).Last();
-                        if (major >= 8 && platformName.StartsWith("netcoreapp"))
-                        {
-                            continue; // NServiceBus 8 no longer targets netcore 3.1
-                        }
                         if (platformName.StartsWith("net4") && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                         {
                             continue;
