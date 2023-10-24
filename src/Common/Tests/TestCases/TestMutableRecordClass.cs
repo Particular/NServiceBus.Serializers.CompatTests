@@ -8,7 +8,7 @@
     {
         public override Type MessageType => typeof(MutableRecordClass);
 
-        public override object CreateInstance(ISerializerFacade serializer) =>
+        public override object CreateInstance() =>
             new MutableRecordClass()
             {
                 IntProperty = 42,

@@ -9,7 +9,7 @@ namespace Common.Tests.TestCases
     {
         public override Type MessageType => typeof(ReadonlyRecordClass);
 
-        public override object CreateInstance(ISerializerFacade serializer) =>
+        public override object CreateInstance() =>
             new ReadonlyRecordClass(42, "Hello World!");
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
