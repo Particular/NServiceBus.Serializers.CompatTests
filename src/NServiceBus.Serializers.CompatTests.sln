@@ -68,11 +68,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus7.6", "NServiceB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus7.7", "NServiceBus7.7\NServiceBus7.7.csproj", "{55C03D74-887D-44B4-BBB8-8726849AA459}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus7.8", "NServiceBus7.8\NServiceBus7.8.csproj", "{EF2B71CD-D9E9-4F3E-ABA6-017DC3F1BC95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus7.8", "NServiceBus7.8\NServiceBus7.8.csproj", "{EF2B71CD-D9E9-4F3E-ABA6-017DC3F1BC95}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus8.1", "NServiceBus8.1\NServiceBus8.1.csproj", "{24798BB3-2753-4BEA-88E6-79D688A09D89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBus9.0", "NServiceBus9.0\NServiceBus9.0.csproj", "{551D62B3-4229-4C68-A1DB-F6A98ADE5489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NServiceBus9.0", "NServiceBus9.0\NServiceBus9.0.csproj", "{551D62B3-4229-4C68-A1DB-F6A98ADE5489}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD4AE024-F3D3-421A-ACA3-A871B13E1375}"
+	ProjectSection(SolutionItems) = preProject
+		Custom.Build.props = Custom.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

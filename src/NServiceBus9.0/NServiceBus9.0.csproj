@@ -1,9 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <RootNamespace>NServiceBus9._0</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="NServiceBus" Version="9.0.0-alpha.2" />
@@ -11,16 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Common\Program.cs" Link="Program.cs" />
-    <Compile Include="..\NServiceBus8.0\JsonSerializerFacade.cs" Link="JsonSerializerFacade.cs" />
-    <Compile Include="..\NServiceBus8.0\XmlSerializerFacade.cs" Link="XmlSerializerFacade.cs" />
-    <Compile Include="..\NServiceBus8.0\ExcludeList.cs" Link="ExcludeList.cs" />
-    <Compile Include="..\NServiceBus8.0\StreamExtensions.cs" Link="StreamExtensions.cs" />
-    <Compile Include="..\NServiceBus8.1\SystemJsonSerializerFacade.cs" Link="SystemJsonSerializerFacade.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <Compile Include="..\Common\Program.cs" />
   </ItemGroup>
 
 </Project>

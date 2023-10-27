@@ -64,7 +64,7 @@ class JsonSerializerFacade : ISerializerFacade
     MessageMapper mapper;
     JsonMessageSerializer serializer;
 
-    Dictionary<string, string> headers = new Dictionary<string, string>();
+    Dictionary<string, string> headers = [];
     string typeHeaderName = "NServiceBus.EnclosedMessageTypes";
 
     class FakeBuilder : IBuilder
