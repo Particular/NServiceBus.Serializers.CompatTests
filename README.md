@@ -1,8 +1,10 @@
 # NServiceBus.Serializers.CompatTests
 
-Tests to ensure backwards compatibility for our serializers.
+NServiceBus.Serializers.CompatTests consists of tests to ensure backwards compatibility for NServiceBus serializers. 
 
-## How to run the tests
+It is part of the toolset used internally to maintain high quality standards in the [Particular Service Platform](https://particular.net/service-platform), which includes [NServiceBus](https://particular.net/nservicebus) and tools to build, monitor, and debug distributed systems.
+
+## Running tests locally
 
 The `Tests` project contains two tests to run:
 * Serialize: Serializes all test cases via the available serializers as files to disk. This test should be run first to generate the files required for the deserialization test.
