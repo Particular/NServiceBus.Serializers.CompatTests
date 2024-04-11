@@ -38,6 +38,6 @@
 
     class EmptyExcludes : Excludes
     {
-        protected override Dictionary<Type, string[]> FilesToExclude { get; } = new Dictionary<Type, string[]>(0);
+        protected override Dictionary<Type, string[]> FilesToExclude { get; } = [];
     }
 }

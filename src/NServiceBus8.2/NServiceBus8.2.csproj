@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net472;net6.0;net8.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NServiceBus7._0</RootNamespace>
+    <RootNamespace>NServiceBus8._2</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,12 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="7.0.*" />
-    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.*" />
+    <PackageReference Include="NServiceBus" Version="8.2.*" />
+    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="3.*" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\Common\Program.cs" />
+    <Compile Include="..\NServiceBus8.0\*.cs" />
   </ItemGroup>
 
 </Project>
