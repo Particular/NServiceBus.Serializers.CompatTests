@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NServiceBus9._2</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NServiceBus" Version="9.2.0-alpha.1" />
+    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Common\Program.cs" />
+  </ItemGroup>
+
+</Project>
