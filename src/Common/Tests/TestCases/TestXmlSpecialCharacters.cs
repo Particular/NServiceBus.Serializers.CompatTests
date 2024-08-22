@@ -25,8 +25,11 @@
             var expected = (TestMessageWithChar)expectedObj;
             var actual = (TestMessageWithChar)actualObj;
 
-            Assert.That(actual.ValidCharacter, Is.EqualTo(expected.ValidCharacter), "Valid characters do not match.");
-            Assert.That(actual.InvalidCharacter, Is.EqualTo(expected.InvalidCharacter), "Invalid characters do not match.");
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.ValidCharacter, Is.EqualTo(expected.ValidCharacter), "Valid characters do not match.");
+                Assert.That(actual.InvalidCharacter, Is.EqualTo(expected.InvalidCharacter), "Invalid characters do not match.");
+            });
         }
     }
 }

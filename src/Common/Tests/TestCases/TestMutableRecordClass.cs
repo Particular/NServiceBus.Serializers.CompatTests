@@ -17,8 +17,11 @@
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            Assert.That(expectedObj, Is.InstanceOf<MutableRecordClass>());
-            Assert.That(actualObj, Is.InstanceOf<MutableRecordClass>());
+            Assert.Multiple(() =>
+            {
+                Assert.That(expectedObj, Is.InstanceOf<MutableRecordClass>());
+                Assert.That(actualObj, Is.InstanceOf<MutableRecordClass>());
+            });
             Assert.That(actualObj, Is.EqualTo(expectedObj), "record types should implement value equality by default");
         }
     }

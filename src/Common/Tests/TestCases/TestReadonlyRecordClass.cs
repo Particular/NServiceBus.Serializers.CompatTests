@@ -14,8 +14,11 @@ namespace Common.Tests.TestCases
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            Assert.That(expectedObj, Is.InstanceOf<ReadonlyRecordClass>());
-            Assert.That(actualObj, Is.InstanceOf<ReadonlyRecordClass>());
+            Assert.Multiple(() =>
+            {
+                Assert.That(expectedObj, Is.InstanceOf<ReadonlyRecordClass>());
+                Assert.That(actualObj, Is.InstanceOf<ReadonlyRecordClass>());
+            });
             Assert.That(actualObj, Is.EqualTo(expectedObj), "record types should implement value equality by default");
         }
     }
