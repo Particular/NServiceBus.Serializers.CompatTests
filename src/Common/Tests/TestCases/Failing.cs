@@ -16,7 +16,9 @@
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
+#pragma warning disable NUnit2007
             Assert.That("0", Is.EqualTo("1"));
+#pragma warning restore NUnit2007
         }
     }
 }
