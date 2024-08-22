@@ -121,21 +121,24 @@
             var expected = (MessageWithDictionaries)expectedObj;
             var actual = (MessageWithDictionaries)actualObj;
 
-            Assert.That(actual.Bools, Is.EqualTo(expected.Bools).AsCollection);
-            Assert.That(actual.Chars, Is.EqualTo(expected.Chars).AsCollection);
-            Assert.That(actual.Bytes, Is.EqualTo(expected.Bytes).AsCollection);
-            Assert.That(actual.Ints, Is.EqualTo(expected.Ints).AsCollection);
-            Assert.That(actual.Decimals, Is.EqualTo(expected.Decimals).AsCollection);
-            Assert.That(actual.Doubles, Is.EqualTo(expected.Doubles).AsCollection);
-            Assert.That(actual.Floats, Is.EqualTo(expected.Floats).AsCollection);
-            Assert.That(actual.Enums, Is.EqualTo(expected.Enums).AsCollection);
-            Assert.That(actual.Longs, Is.EqualTo(expected.Longs).AsCollection);
-            Assert.That(actual.SBytes, Is.EqualTo(expected.SBytes).AsCollection);
-            Assert.That(actual.Shorts, Is.EqualTo(expected.Shorts).AsCollection);
-            Assert.That(actual.Strings, Is.EqualTo(expected.Strings).AsCollection);
-            Assert.That(actual.UInts, Is.EqualTo(expected.UInts).AsCollection);
-            Assert.That(actual.ULongs, Is.EqualTo(expected.ULongs).AsCollection);
-            Assert.That(actual.UShorts, Is.EqualTo(expected.UShorts).AsCollection);
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.Bools, Is.EqualTo(expected.Bools).AsCollection);
+                Assert.That(actual.Chars, Is.EqualTo(expected.Chars).AsCollection);
+                Assert.That(actual.Bytes, Is.EqualTo(expected.Bytes).AsCollection);
+                Assert.That(actual.Ints, Is.EqualTo(expected.Ints).AsCollection);
+                Assert.That(actual.Decimals, Is.EqualTo(expected.Decimals).AsCollection);
+                Assert.That(actual.Doubles, Is.EqualTo(expected.Doubles).AsCollection);
+                Assert.That(actual.Floats, Is.EqualTo(expected.Floats).AsCollection);
+                Assert.That(actual.Enums, Is.EqualTo(expected.Enums).AsCollection);
+                Assert.That(actual.Longs, Is.EqualTo(expected.Longs).AsCollection);
+                Assert.That(actual.SBytes, Is.EqualTo(expected.SBytes).AsCollection);
+                Assert.That(actual.Shorts, Is.EqualTo(expected.Shorts).AsCollection);
+                Assert.That(actual.Strings, Is.EqualTo(expected.Strings).AsCollection);
+                Assert.That(actual.UInts, Is.EqualTo(expected.UInts).AsCollection);
+                Assert.That(actual.ULongs, Is.EqualTo(expected.ULongs).AsCollection);
+                Assert.That(actual.UShorts, Is.EqualTo(expected.UShorts).AsCollection);
+            });
         }
     }
 }
