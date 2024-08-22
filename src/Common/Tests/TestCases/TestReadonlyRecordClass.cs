@@ -16,7 +16,7 @@ namespace Common.Tests.TestCases
         {
             Assert.IsInstanceOf<ReadonlyRecordClass>(expectedObj);
             Assert.IsInstanceOf<ReadonlyRecordClass>(actualObj);
-            Assert.AreEqual(expectedObj, actualObj, "record types should implement value equality by default");
+            Assert.That(actualObj, Is.EqualTo(expectedObj), "record types should implement value equality by default");
         }
     }
 }

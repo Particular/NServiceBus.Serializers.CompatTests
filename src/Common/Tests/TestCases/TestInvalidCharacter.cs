@@ -30,7 +30,7 @@
             var expected = (MessageWithInvalidCharacter)expectedObj;
             var actual = (MessageWithInvalidCharacter)actualObj;
 
-            Assert.AreEqual(expected.Special, actual.Special);
+            Assert.That(actual.Special, Is.EqualTo(expected.Special));
         }
     }
 }

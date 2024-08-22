@@ -16,7 +16,7 @@
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            Assert.AreEqual("0", "1");
+            Assert.That("1", Is.EqualTo("0"));
         }
     }
 }
