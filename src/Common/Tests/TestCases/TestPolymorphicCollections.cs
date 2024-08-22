@@ -34,7 +34,7 @@
             var expected = (Polymorphic)actualObj;
             var actual = (Polymorphic)expectedObj;
 
-            CollectionAssert.AreEqual(expected.Items, actual.Items, "Polymorphic object graph does not match.");
+            Assert.That(actual.Items, Is.EqualTo(expected.Items).AsCollection, "Polymorphic object graph does not match.");
         }
     }
 }

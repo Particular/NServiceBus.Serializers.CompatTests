@@ -55,16 +55,25 @@
             var expected = (Dates)expectedObj;
             var actual = (Dates)actualObj;
 
-            Assert.AreEqual(expected.DateTime, actual.DateTime);
-            Assert.AreEqual(expected.DateTimeUtc, actual.DateTimeUtc);
-            Assert.AreEqual(expected.DateTimeLocal, actual.DateTimeLocal);
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.DateTime, Is.EqualTo(expected.DateTime));
+                Assert.That(actual.DateTimeUtc, Is.EqualTo(expected.DateTimeUtc));
+                Assert.That(actual.DateTimeLocal, Is.EqualTo(expected.DateTimeLocal));
 
-            Assert.AreEqual(expected.DateTimeOffset, actual.DateTimeOffset);
-            Assert.AreEqual(expected.DateTimeOffset.Offset, actual.DateTimeOffset.Offset);
-            Assert.AreEqual(expected.DateTimeOffsetLocal, actual.DateTimeOffsetLocal);
-            Assert.AreEqual(expected.DateTimeOffsetLocal.Offset, actual.DateTimeOffsetLocal.Offset);
-            Assert.AreEqual(expected.DateTimeOffsetUtc, actual.DateTimeOffsetUtc);
-            Assert.AreEqual(expected.DateTimeOffsetUtc.Offset, actual.DateTimeOffsetUtc.Offset);
+                Assert.That(actual.DateTimeOffset, Is.EqualTo(expected.DateTimeOffset));
+            });
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.DateTimeOffset.Offset, Is.EqualTo(expected.DateTimeOffset.Offset));
+                Assert.That(actual.DateTimeOffsetLocal, Is.EqualTo(expected.DateTimeOffsetLocal));
+            });
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.DateTimeOffsetLocal.Offset, Is.EqualTo(expected.DateTimeOffsetLocal.Offset));
+                Assert.That(actual.DateTimeOffsetUtc, Is.EqualTo(expected.DateTimeOffsetUtc));
+            });
+            Assert.That(actual.DateTimeOffsetUtc.Offset, Is.EqualTo(expected.DateTimeOffsetUtc.Offset));
         }
 
         static DateTime expectedDateTime = new DateTime(2010, 10, 13, 12, 32, 42, DateTimeKind.Unspecified);

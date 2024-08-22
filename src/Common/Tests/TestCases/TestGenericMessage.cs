@@ -31,8 +31,11 @@
             var expected = (GenericMessage<int, string>)expectedObj;
             var actual = (GenericMessage<int, string>)actualObj;
 
-            Assert.AreEqual(expected.Data1, actual.Data1, "Generic Data1");
-            Assert.AreEqual(expected.Data2, actual.Data2, "Generic Data2");
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.Data1, Is.EqualTo(expected.Data1), "Generic Data1");
+                Assert.That(actual.Data2, Is.EqualTo(expected.Data2), "Generic Data2");
+            });
         }
     }
 }

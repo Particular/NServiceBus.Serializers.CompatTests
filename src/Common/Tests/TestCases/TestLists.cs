@@ -144,21 +144,24 @@
             var expected = (MessageWithLists)expectedObj;
             var actual = (MessageWithLists)actualObj;
 
-            CollectionAssert.AreEqual(expected.Bools, actual.Bools, "Bools collection does not match");
-            CollectionAssert.AreEqual(expected.Chars, actual.Chars, "Chars collection does not match");
-            CollectionAssert.AreEqual(expected.Bytes, actual.Bytes, " Bytes collection does not match");
-            CollectionAssert.AreEqual(expected.Ints, actual.Ints, "Ints collection does not match");
-            CollectionAssert.AreEqual(expected.Decimals, actual.Decimals, "Decimals collection does not match");
-            CollectionAssert.AreEqual(expected.Doubles, actual.Doubles, "Doubles collection does not match");
-            CollectionAssert.AreEqual(expected.Floats, actual.Floats, "Floats collection does not match");
-            CollectionAssert.AreEqual(expected.Enums, actual.Enums, "Enums collection does not match");
-            CollectionAssert.AreEqual(expected.Longs, actual.Longs, "Longs collection does not match");
-            CollectionAssert.AreEqual(expected.SBytes, actual.SBytes, "SBytes collection does not match");
-            CollectionAssert.AreEqual(expected.Shorts, actual.Shorts, "Shorts collection does not match");
-            CollectionAssert.AreEqual(expected.Strings, actual.Strings, "String collection does not match");
-            CollectionAssert.AreEqual(expected.UInts, actual.UInts, "UInts collection does not match");
-            CollectionAssert.AreEqual(expected.ULongs, actual.ULongs, "ULongs collection does not match");
-            CollectionAssert.AreEqual(expected.UShorts, actual.UShorts, "UShorts collection does not match");
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.Bools, Is.EqualTo(expected.Bools).AsCollection, "Bools collection does not match");
+                Assert.That(actual.Chars, Is.EqualTo(expected.Chars).AsCollection, "Chars collection does not match");
+                Assert.That(actual.Bytes, Is.EqualTo(expected.Bytes).AsCollection, " Bytes collection does not match");
+                Assert.That(actual.Ints, Is.EqualTo(expected.Ints).AsCollection, "Ints collection does not match");
+                Assert.That(actual.Decimals, Is.EqualTo(expected.Decimals).AsCollection, "Decimals collection does not match");
+                Assert.That(actual.Doubles, Is.EqualTo(expected.Doubles).AsCollection, "Doubles collection does not match");
+                Assert.That(actual.Floats, Is.EqualTo(expected.Floats).AsCollection, "Floats collection does not match");
+                Assert.That(actual.Enums, Is.EqualTo(expected.Enums).AsCollection, "Enums collection does not match");
+                Assert.That(actual.Longs, Is.EqualTo(expected.Longs).AsCollection, "Longs collection does not match");
+                Assert.That(actual.SBytes, Is.EqualTo(expected.SBytes).AsCollection, "SBytes collection does not match");
+                Assert.That(actual.Shorts, Is.EqualTo(expected.Shorts).AsCollection, "Shorts collection does not match");
+                Assert.That(actual.Strings, Is.EqualTo(expected.Strings).AsCollection, "String collection does not match");
+                Assert.That(actual.UInts, Is.EqualTo(expected.UInts).AsCollection, "UInts collection does not match");
+                Assert.That(actual.ULongs, Is.EqualTo(expected.ULongs).AsCollection, "ULongs collection does not match");
+                Assert.That(actual.UShorts, Is.EqualTo(expected.UShorts).AsCollection, "UShorts collection does not match");
+            });
         }
     }
 }

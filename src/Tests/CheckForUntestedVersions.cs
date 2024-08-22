@@ -13,6 +13,12 @@
     [TestFixture]
     class CheckForUntestedVersions
     {
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            Cache.Dispose();
+        }
+
         [Test]
         public async Task Should_test_latest_minor_versions()
         {

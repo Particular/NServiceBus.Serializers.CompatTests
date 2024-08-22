@@ -15,8 +15,6 @@
         public override object CreateInstance() => null;
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
-        {
-            Assert.AreEqual("0", "1");
-        }
+            => throw new AssertionException("This test case is always failing");
     }
 }

@@ -19,8 +19,11 @@
             var expected = (Person)expectedObj;
             var actual = (Person)actualObj;
 
-            Assert.AreEqual(expected.FirstName, actual.FirstName, "FirstName does not match");
-            Assert.AreEqual(expected.LastName, actual.LastName, "LastName does not match");
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.FirstName, Is.EqualTo(expected.FirstName), "FirstName does not match");
+                Assert.That(actual.LastName, Is.EqualTo(expected.LastName), "LastName does not match");
+            });
         }
     }
 }

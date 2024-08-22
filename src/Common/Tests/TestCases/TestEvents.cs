@@ -23,7 +23,7 @@
             var expected = (ISampleEvent)expectedObj;
             var actual = (ISampleEvent)actualObj;
 
-            Assert.AreEqual(expected.Value, actual.Value);
+            Assert.That(actual.Value, Is.EqualTo(expected.Value));
         }
     }
 }
