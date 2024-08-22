@@ -15,10 +15,6 @@
         public override object CreateInstance() => null;
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
-        {
-#pragma warning disable NUnit2007
-            Assert.That("0", Is.EqualTo("1"));
-#pragma warning restore NUnit2007
-        }
+            => throw new AssertionException("This test case is always failing");
     }
 }
