@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net472;net8.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>NServiceBus8._1</RootNamespace>
   </PropertyGroup>
@@ -13,6 +13,10 @@
   <ItemGroup>
     <PackageReference Include="NServiceBus" Version="8.1.*" />
     <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Label="Direct references to transitive dependencies to avoid versions with CVE">
+    <PackageReference Include="System.Text.Json" Version="8.*" />
   </ItemGroup>
 
   <ItemGroup>
