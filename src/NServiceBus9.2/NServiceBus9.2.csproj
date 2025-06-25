@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Compile Include="..\Common\Program.cs" />
+    <Compile Include="..\NServiceBus9.0\*.cs" />
   </ItemGroup>
 
 </Project>
