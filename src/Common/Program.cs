@@ -26,6 +26,9 @@ class Program
         var serializers = new[]
         {
             Type.GetType("JsonSerializerFacade", true),
+#if SYSTEMJSON
+            Type.GetType("SystemJsonSerializerFacade", true),
+#endif
             Type.GetType("XmlSerializerFacade", true)
         };
         var testCases = DiscoverTestCases();
@@ -83,8 +86,7 @@ class Program
         var files = Directory.GetFiles(testCaseFolder);
         if (files.Length == 0)
         {
-            throw new Exception(
-                "No available files to deserialize. Make sure to run the serialization test case first.");
+            throw new Exception("No available files to deserialize. Make sure to run the serialization test case first.");
         }
 
         foreach (var filePath in files)

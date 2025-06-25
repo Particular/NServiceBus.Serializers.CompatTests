@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>NServiceBus10._0</RootNamespace>
+    <DefineConstants>SYSTEMJSON</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

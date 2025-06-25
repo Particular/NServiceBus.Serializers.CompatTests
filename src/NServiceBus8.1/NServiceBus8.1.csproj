@@ -4,6 +4,7 @@
     <TargetFrameworks>net472;net10.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>NServiceBus8._1</RootNamespace>
+    <DefineConstants>SYSTEMJSON</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
