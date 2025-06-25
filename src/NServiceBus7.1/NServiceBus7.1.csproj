@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;net8.0</TargetFrameworks>
+    <TargetFrameworks>net472;net10.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>NServiceBus7._1</RootNamespace>
   </PropertyGroup>
@@ -16,10 +16,9 @@
   </ItemGroup>
 
   <ItemGroup Label="Direct references to transitive dependencies to avoid versions with CVE">
-    <PackageReference Include="System.Drawing.Common" Version="4.*" />
-    <PackageReference Include="System.Private.Uri" Version="4.*" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="4.*" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="10.*-*" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\Common\Program.cs" />
     <Compile Include="..\NServiceBus7.0\*.cs" />
