@@ -33,7 +33,7 @@ class Program
         };
         var testCases = DiscoverTestCases();
 
-        if (args.Contains("Serialize") || args.Length == 0)
+        if (args.Contains("serialize", StringComparer.OrdinalIgnoreCase) || args.Length == 0)
         {
             Console.WriteLine("Running Serialization tests for:");
             Assert.Multiple(() =>
@@ -53,7 +53,7 @@ class Program
             });
         }
 
-        if (args.Contains("Deserialize") || args.Length == 0)
+        if (args.Contains("deserialize", StringComparer.OrdinalIgnoreCase) || args.Length == 0)
         {
             Console.WriteLine("Running Deserialization tests for:");
             Assert.Multiple(() =>
