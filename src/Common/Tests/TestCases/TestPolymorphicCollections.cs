@@ -31,10 +31,10 @@
 
         public override void CheckIfAreEqual(object expectedObj, object actualObj)
         {
-            var expected = (Polymorphic)actualObj;
-            var actual = (Polymorphic)expectedObj;
+            var expected = (Polymorphic)expectedObj;
+            var actual = (Polymorphic)actualObj;
 
-            Assert.That(actual.Items, Is.EqualTo(expected.Items).AsCollection, "Polymorphic object graph does not match.");
+            Assert.That(actual.Items, Is.EqualTo(expected.Items), "Polymorphic object graph does not match.");
         }
     }
 }
