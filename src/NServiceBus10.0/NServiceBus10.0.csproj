@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NServiceBus9._2</RootNamespace>
+    <RootNamespace>NServiceBus10._0</RootNamespace>
     <DefineConstants>SYSTEMJSON</DefineConstants>
   </PropertyGroup>
 
@@ -12,13 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="9.2.*" />
-    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="4.*" />
+    <PackageReference Include="NServiceBus" Version="10.*-*" />
+    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="5.*-*" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\Common\Program.cs" />
-    <Compile Include="..\NServiceBus9.0\*.cs" />
   </ItemGroup>
 
 </Project>

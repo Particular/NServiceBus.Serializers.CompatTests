@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>NServiceBus9._1</RootNamespace>
+    <DefineConstants>SYSTEMJSON</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
 
   <ItemGroup>
     <Compile Include="..\Common\Program.cs" />
+    <Compile Include="..\NServiceBus9.0\*.cs" />
   </ItemGroup>
 
 </Project>

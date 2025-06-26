@@ -26,11 +26,14 @@ class Program
         var serializers = new[]
         {
             Type.GetType("JsonSerializerFacade", true),
+#if SYSTEMJSON
+            Type.GetType("SystemJsonSerializerFacade", true),
+#endif
             Type.GetType("XmlSerializerFacade", true)
         };
         var testCases = DiscoverTestCases();
 
-        if (args.Contains("Serialize") || args.Length == 0)
+        if (args.Contains("serialize", StringComparer.OrdinalIgnoreCase) || args.Length == 0)
         {
             Console.WriteLine("Running Serialization tests for:");
             Assert.Multiple(() =>
@@ -50,7 +53,7 @@ class Program
             });
         }
 
-        if (args.Contains("Deserialize") || args.Length == 0)
+        if (args.Contains("deserialize", StringComparer.OrdinalIgnoreCase) || args.Length == 0)
         {
             Console.WriteLine("Running Deserialization tests for:");
             Assert.Multiple(() =>
@@ -83,8 +86,7 @@ class Program
         var files = Directory.GetFiles(testCaseFolder);
         if (files.Length == 0)
         {
-            throw new Exception(
-                "No available files to deserialize. Make sure to run the serialization test case first.");
+            throw new Exception("No available files to deserialize. Make sure to run the serialization test case first.");
         }
 
         foreach (var filePath in files)
