@@ -1,7 +1,12 @@
 <Project>
 
   <PropertyGroup>
-    <LangVersion>preview</LangVersion>
+    <LangVersion>14.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Workaround to fix problem with RC1 SDK not turning on package pruning when project is multi-targeted">
+    <RestoreEnablePackagePruning>true</RestoreEnablePackagePruning>
+    <RestoreEnablePackagePruning Condition="'$(TargetFramework)' == 'net472'">false</RestoreEnablePackagePruning>
   </PropertyGroup>
 
 </Project>
