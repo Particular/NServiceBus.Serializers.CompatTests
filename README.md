@@ -58,12 +58,6 @@ To add tests for a new serializer, follow these steps:
 
 For known test incompatibilities, exclusions can be defined to skip deserialization for specific test types from specific versions on the current project. Exclusions are specified by creating a custom class in a project deriving from `Excludes` (minor versions of the same major version might want to include the exclude list from the MajorVersion.0 project). The `FilesToExclude` contains a collection of test configurations to ignore. Each configuration to ignore is defined by the type (implementing `TestCase`) of the test and the name of the serialized test case file, e.g. `"NServiceBus4.6 .NET Framework 4.5.2.json"`.
 
-## Build triggers
-
-The tests are triggered by:
-* A weekly schedule
-* Whenever a new (latest) package of `NServiceBus` or `NServiceBus.Newtonsoft.Json` has been pushed to the company's feedz.io feed.
-
 ## Dependencies
 
 The test projects reference different Major.Minor versions of NServicebus. In those projects, NServiceBus packages should not be updated. The following [command was used](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/23#issuecomment-797354551) to make dependabot ignore NServiceBus updates in this repository. If it proves to be inefficient dependabot could be disabled as in [the following PR](https://github.com/Particular/NServiceBus.Serializers.CompatTests/pull/32)
