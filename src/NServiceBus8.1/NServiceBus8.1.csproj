@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Direct references to transitive dependencies to avoid versions with CVE">
-    <PackageReference Include="System.Text.Json" Version="10.*-*" Condition="'$(TargetFramework)' == 'net472'" />
+    <PackageReference Include="System.Text.Json" Version="10.*" Condition="'$(TargetFramework)' == 'net472'" />
   </ItemGroup>
 
   <ItemGroup>
