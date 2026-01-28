@@ -144,7 +144,7 @@
             var expected = (MessageWithLists)expectedObj;
             var actual = (MessageWithLists)actualObj;
 
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(actual.Bools, Is.EqualTo(expected.Bools).AsCollection, "Bools collection does not match");
                 Assert.That(actual.Chars, Is.EqualTo(expected.Chars).AsCollection, "Chars collection does not match");
@@ -161,7 +161,7 @@
                 Assert.That(actual.UInts, Is.EqualTo(expected.UInts).AsCollection, "UInts collection does not match");
                 Assert.That(actual.ULongs, Is.EqualTo(expected.ULongs).AsCollection, "ULongs collection does not match");
                 Assert.That(actual.UShorts, Is.EqualTo(expected.UShorts).AsCollection, "UShorts collection does not match");
-            });
+            }
         }
     }
 }

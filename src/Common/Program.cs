@@ -36,7 +36,7 @@ class Program
         if (args.Contains("serialize", StringComparer.OrdinalIgnoreCase) || args.Length == 0)
         {
             Console.WriteLine("Running Serialization tests for:");
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 foreach (var serializerType in serializers)
                 {
@@ -50,31 +50,30 @@ class Program
                         }
                     }
                 }
-            });
+            }
         }
 
         if (args.Contains("deserialize", StringComparer.OrdinalIgnoreCase) || args.Length == 0)
         {
             Console.WriteLine("Running Deserialization tests for:");
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
+            {
+                foreach (var serializerType in serializers)
                 {
-                    foreach (var serializerType in serializers)
+                    foreach (var testCase in testCases)
                     {
-                        foreach (var testCase in testCases)
+                        var serializer =
+                            (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
+                        if (testCase.IsSupported(serializer.SerializationFormat,
+                            new PackageVersion(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart,
+                                NsbVersion.FileBuildPart)))
                         {
-                            var serializer =
-                                (ISerializerFacade)Activator.CreateInstance(serializerType, testCase.MessageType);
-                            if (testCase.IsSupported(serializer.SerializationFormat,
-                                new PackageVersion(NsbVersion.FileMajorPart, NsbVersion.FileMinorPart,
-                                    NsbVersion.FileBuildPart)))
-                            {
-                                Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
-                                DeserializeAndVerify(serializer, testCase);
-                            }
+                            Console.WriteLine($"{serializer.SerializationFormat:G} — {testCase.GetType().Name}");
+                            DeserializeAndVerify(serializer, testCase);
                         }
                     }
                 }
-            );
+            }
         }
     }
 

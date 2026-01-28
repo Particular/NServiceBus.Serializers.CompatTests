@@ -121,7 +121,7 @@
             var expected = (MessageWithDictionaries)expectedObj;
             var actual = (MessageWithDictionaries)actualObj;
 
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(actual.Bools, Is.EqualTo(expected.Bools).AsCollection);
                 Assert.That(actual.Chars, Is.EqualTo(expected.Chars).AsCollection);
@@ -138,7 +138,7 @@
                 Assert.That(actual.UInts, Is.EqualTo(expected.UInts).AsCollection);
                 Assert.That(actual.ULongs, Is.EqualTo(expected.ULongs).AsCollection);
                 Assert.That(actual.UShorts, Is.EqualTo(expected.UShorts).AsCollection);
-            });
+            }
         }
     }
 }

@@ -55,24 +55,24 @@
             var expected = (Dates)expectedObj;
             var actual = (Dates)actualObj;
 
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(actual.DateTime, Is.EqualTo(expected.DateTime));
                 Assert.That(actual.DateTimeUtc, Is.EqualTo(expected.DateTimeUtc));
                 Assert.That(actual.DateTimeLocal, Is.EqualTo(expected.DateTimeLocal));
 
                 Assert.That(actual.DateTimeOffset, Is.EqualTo(expected.DateTimeOffset));
-            });
-            Assert.Multiple(() =>
+            }
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(actual.DateTimeOffset.Offset, Is.EqualTo(expected.DateTimeOffset.Offset));
                 Assert.That(actual.DateTimeOffsetLocal, Is.EqualTo(expected.DateTimeOffsetLocal));
-            });
-            Assert.Multiple(() =>
+            }
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(actual.DateTimeOffsetLocal.Offset, Is.EqualTo(expected.DateTimeOffsetLocal.Offset));
                 Assert.That(actual.DateTimeOffsetUtc, Is.EqualTo(expected.DateTimeOffsetUtc));
-            });
+            }
             Assert.That(actual.DateTimeOffsetUtc.Offset, Is.EqualTo(expected.DateTimeOffsetUtc.Offset));
         }
 
