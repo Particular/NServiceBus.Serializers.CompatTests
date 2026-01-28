@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using Common;
 using Common.Tests;
 using NServiceBus;
@@ -17,12 +16,9 @@ class XmlSerializerFacade : ISerializerFacade
         var settings = new SettingsHolder();
         var conventions = CreateTestConventions(settings);
 
-        // evil hack
-        settings.Set((MessageMetadataRegistry)Activator.CreateInstance
-        (typeof(MessageMetadataRegistry),
-            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null,
-            new object[] { new Func<Type, bool>(conventions.IsMessageType), true },
-            null));
+        var registry = new MessageMetadataRegistry(conventions.IsMessageType, true);
+        settings.Set(registry);
+
         settings.Set(conventions);
 
         serializer = new XmlSerializer().Configure(settings)(mapper);

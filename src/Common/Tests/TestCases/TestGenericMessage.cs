@@ -31,11 +31,11 @@
             var expected = (GenericMessage<int, string>)expectedObj;
             var actual = (GenericMessage<int, string>)actualObj;
 
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(actual.Data1, Is.EqualTo(expected.Data1), "Generic Data1");
                 Assert.That(actual.Data2, Is.EqualTo(expected.Data2), "Generic Data2");
-            });
+            }
         }
     }
 }

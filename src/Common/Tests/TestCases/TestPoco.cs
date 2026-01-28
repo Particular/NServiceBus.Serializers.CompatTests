@@ -19,11 +19,11 @@
             var expected = (Person)expectedObj;
             var actual = (Person)actualObj;
 
-            Assert.Multiple(() =>
+            using (Assert.EnterMultipleScope())
             {
                 Assert.That(actual.FirstName, Is.EqualTo(expected.FirstName), "FirstName does not match");
                 Assert.That(actual.LastName, Is.EqualTo(expected.LastName), "LastName does not match");
-            });
+            }
         }
     }
 }
