@@ -4,6 +4,7 @@
   </Folder>
   <Project Path="Common/Common.csproj" />
   <Project Path="NServiceBus10.0/NServiceBus10.0.csproj" />
+  <Project Path="NServiceBus10.1/NServiceBus10.1.csproj" />
   <Project Path="NServiceBus3.3/NServiceBus3.3.csproj" />
   <Project Path="NServiceBus4.0/NServiceBus4.0.csproj" />
   <Project Path="NServiceBus4.1/NServiceBus4.1.csproj" />
